@@ -1,0 +1,230 @@
+{
+	"id": "160e2bcd-eb1a-4ae0-9d6c-51c5331c02cf",
+	"name": "Blog",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"19e939d7-c0c5-4612-82ad-8f08ea06c7b6",
+		"a3e5da59-d5a4-4670-9c85-965039ace5b7",
+		"72962527-1838-446b-a535-9667dc89f22c",
+		"9edc1d17-517f-4b48-bdbf-98603bb5e850",
+		"96c9d23b-b532-444d-b7c2-b2b21bad4136",
+		"4bfdd84d-d7b6-4a64-bc2c-51c27abdf67e",
+		"e262f548-8a8b-4c68-9021-3d3e07ff13b8",
+		"7af665b1-826f-4761-843b-bb2d0e831ae7",
+		"718602d3-468f-4afe-b905-3913266484ef",
+		"bfbeb6d7-63e5-4241-852f-a0eb85379b12"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "19e939d7-c0c5-4612-82ad-8f08ea06c7b6",
+			"name": "getTags",
+			"url": "http://localhost:8080/blog/rest/tags",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "4bfdd84d-d7b6-4a64-bc2c-51c27abdf67e",
+			"name": "add Tag",
+			"url": "http://localhost:8080/blog/rest/tags",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": " {\n    \"nome\": \"Volley\"\n }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "718602d3-468f-4afe-b905-3913266484ef",
+			"name": "delete comment",
+			"url": "http://localhost:8080/blog/rest/commenti/2",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": " ",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "72962527-1838-446b-a535-9667dc89f22c",
+			"name": "insert utente",
+			"url": "http://localhost:8080/blog/rest/utenti",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": " {\n        \"email\": \"user@user.com\",\n        \"password\": \"password\",\n        \"isActive\": false,\n        \"failedAccessAttempts\": 0,\n        \"isBanned\": false,\n        \"dateCreation\": \"2018-05-18\",\n        \"dateLastAccess\": null,\n        \"ruolo\": {\n            \"id\": 3,\n            \"nome\": \"utente\"\n        }\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "7af665b1-826f-4761-843b-bb2d0e831ae7",
+			"name": "delete tag",
+			"url": "http://localhost:8080/blog/rest/tags/15",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": " ",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "96c9d23b-b532-444d-b7c2-b2b21bad4136",
+			"name": "getListaCategorie",
+			"url": "http://localhost:8080/blog/rest/categorie",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "9edc1d17-517f-4b48-bdbf-98603bb5e850",
+			"name": "getListaPost",
+			"url": "http://localhost:8080/blog/rest/utenti",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "a3e5da59-d5a4-4670-9c85-965039ace5b7",
+			"name": "getListaUtenti",
+			"url": "http://localhost:8080/blog/rest/utenti/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb24ifQ.ffSTTCQLIUMclp8ePaZ8C1_axzCufaMoV3WhmQUq_ZgnzvL124fSdNuuxzi3KqYqM-hFJwrgh3dSyP8idGOElg",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "bfbeb6d7-63e5-4241-852f-a0eb85379b12",
+			"name": "delete post",
+			"url": "http://localhost:8080/blog/rest/posts/3",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": " ",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "e262f548-8a8b-4c68-9021-3d3e07ff13b8",
+			"name": "add Utente",
+			"url": "http://localhost:8080/blog/rest/utenti",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "    {\n        \"email\": \"user@user.com\",\n        \"password\": \"clearPassword\",\n        \"isActive\": false,\n        \"failedAccessAttempts\": 0,\n        \"isBanned\": false,\n        \"dateCreation\": \"2018-04-26\",\n        \"dateLastAccess\": null,\n        \"ruolo\": {\n            \"id\": 3,\n            \"nome\": \"utente\"\n        }\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		}
+	]
+}
