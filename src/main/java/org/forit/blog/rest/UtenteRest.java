@@ -28,8 +28,12 @@ public class UtenteRest {
     @GET
     @Produces("application/json")
     public String getKey(@PathParam("auth") String compactJws) {
+        try {
             Authentication auth = new Authentication();
-            return auth.getJWS("jon");
+            return auth.getJWS();
+        } catch (BlogException ex) {
+            return null;
+        }
     }
 
     @Path("/{auth}")
@@ -38,7 +42,7 @@ public class UtenteRest {
     public List<UtenteDTO> loadUtenti(@PathParam("auth") String compactJws) {
         try {
             Authentication auth = new Authentication();
-            auth.getJWS("jon");
+            auth.getJWS();
             auth.checkJWS(compactJws, "jon");
             UtenteDAO uDAO = new UtenteDAO();
             return uDAO.getListaUtenti();

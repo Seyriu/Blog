@@ -166,7 +166,7 @@
 		{
 			"id": "a3e5da59-d5a4-4670-9c85-965039ace5b7",
 			"name": "getListaUtenti",
-			"url": "http://localhost:8080/blog/rest/utenti/eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb24ifQ.ffSTTCQLIUMclp8ePaZ8C1_axzCufaMoV3WhmQUq_ZgnzvL124fSdNuuxzi3KqYqM-hFJwrgh3dSyP8idGOElg",
+			"url": "http://localhost:8080/blog/rest/utenti/eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwibmFtZSI6IlJvYmVydCBUb2tlbiBNYW4iLCJzY29wZSI6InNlbGYgZ3JvdXBzL2FkbWlucyJ9.CWj7hJUNmzVRkHIjqtDZJtrnWJgeZbfZDsY-zEBV7pw",
 			"description": "",
 			"data": null,
 			"dataMode": "params",
