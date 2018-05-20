@@ -36,7 +36,7 @@ public class CommentoEntity implements Serializable {
   @Column(name = "ID", unique = true, nullable = false)
   private long id;
 
-  @Column(name = "TESTO", unique = false, nullable = true)
+  @Column(name = "TESTO", unique = false, nullable = false)
   private String testo;
 
   @Column(name = "DATA_INSERIMENTO", unique = false, nullable = false)
@@ -45,7 +45,7 @@ public class CommentoEntity implements Serializable {
   @Column(name = "RISPOSTA", unique = false, nullable = true)
   private String risposta;
 
-  @Column(name = "DATA_RISPOSTA", unique = false, nullable = false)
+  @Column(name = "DATA_RISPOSTA", unique = false, nullable = true)
   private LocalDate dataRisposta;
 
   @Column(name = "VISIBILE", unique = false, nullable = false)

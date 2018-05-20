@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import org.forit.blog.dto.CategoriaDTO;
@@ -16,7 +17,9 @@ import org.forit.blog.dto.CommentoDTO;
 import org.forit.blog.dto.PostDTO;
 import org.forit.blog.dto.RuoloDTO;
 import org.forit.blog.dto.UtenteDTO;
+import org.forit.blog.entity.CommentoEntity;
 import org.forit.blog.entity.PostEntity;
+import org.forit.blog.exceptions.BlogException;
 
 /**
  *
@@ -92,5 +95,26 @@ public class PostDAO {
     emf.close();
 
     return pDTO;
+  }
+  
+  public void deletePost(long id) throws BlogException{
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+    EntityManager em = emf.createEntityManager();
+
+    EntityTransaction transaction = em.getTransaction();
+    try {
+      transaction.begin();
+      
+      PostEntity post = em.find(PostEntity.class, id);
+      em.remove(post);
+
+      transaction.commit();
+    } catch (Exception ex) {
+      transaction.rollback();
+      throw new BlogException(ex);
+    } finally {
+      em.close();
+      emf.close();
+    }
   }
 }
