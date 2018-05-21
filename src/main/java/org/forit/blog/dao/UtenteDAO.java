@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import org.forit.blog.authentication.Authentication;
 import org.forit.blog.dto.RuoloDTO;
 import org.forit.blog.dto.UtenteDTO;
 import org.forit.blog.entity.RuoloEntity;
@@ -46,55 +47,93 @@ public class UtenteDAO {
 
     return uDTO;
   }
-  
+
   public List<UtenteDTO> getListaUtenti() {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
     EntityManager em = emf.createEntityManager();
     TypedQuery<UtenteEntity> query = em.createNamedQuery("utente.selectAll", UtenteEntity.class);
     List<UtenteEntity> list = query.getResultList();
     List<UtenteDTO> uDTO = list.stream().map(uEntity -> {
-        UtenteDAO uDAO = new UtenteDAO();
-        return uDAO.UtenteEntityToUtenteDTO(uEntity);
-      }).collect(Collectors.toList());
+      UtenteDAO uDAO = new UtenteDAO();
+      return uDAO.UtenteEntityToUtenteDTO(uEntity);
+    }).collect(Collectors.toList());
     em.close();
     emf.close();
 
     return uDTO;
   }
-  
+
+  public UtenteDTO loadUtente(long id) {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+    EntityManager em = emf.createEntityManager();
+    UtenteEntity utenteEntity = em.find(UtenteEntity.class, id);
+    UtenteDTO uDTO = this.UtenteEntityToUtenteDTO(utenteEntity);
+    em.close();
+    emf.close();
+
+    return uDTO;
+  }
+
+  public UtenteEntity loadUtenteByEmail(String email) {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+    EntityManager em = emf.createEntityManager();
+    TypedQuery<UtenteEntity> query = em.createNamedQuery("utente.selectUserByEmail", UtenteEntity.class)
+            .setParameter("email", email);
+    UtenteEntity uEntity = query.getResultList().get(0);
+    em.close();
+    emf.close();
+
+    return uEntity;
+  }
+
   public void insertUtente(UtenteDTO uDTO) throws BlogException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
-        EntityManager em = emf.createEntityManager();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+    EntityManager em = emf.createEntityManager();
 
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
+    EntityTransaction transaction = em.getTransaction();
+    try {
+      transaction.begin();
 
-            UtenteEntity uEntity = new UtenteEntity();
-            uEntity.setEmail(uDTO.getEmail());
-            uEntity.setPassword(uDTO.getPassword());
-            uEntity.setDateCreation(uDTO.getDateCreation());
-            uEntity.setDateLastAccess(null);
-            uEntity.setFailed_access_attempts(0);
-            uEntity.setIsActive(uDTO.getIsActive());
-            uEntity.setIsBanned(uDTO.getIsBanned());
-            if (uDTO.getRuolo() != null) {
-                uEntity.setRuolo(new RuoloEntity(
-                        uDTO.getRuolo().getId(),
-                        uDTO.getRuolo().getNome()
-                ));
-            } else {
-                uEntity.setRuolo(null);
-            }
+      UtenteEntity uEntity = new UtenteEntity();
+      uEntity.setEmail(uDTO.getEmail());
+      uEntity.setPassword(uDTO.getPassword());
+      uEntity.setDateCreation(uDTO.getDateCreation());
+      uEntity.setDateLastAccess(null);
+      uEntity.setFailed_access_attempts(0);
+      uEntity.setIsActive(uDTO.getIsActive());
+      uEntity.setIsBanned(uDTO.getIsBanned());
+      if (uDTO.getRuolo() != null) {
+        uEntity.setRuolo(new RuoloEntity(
+                uDTO.getRuolo().getId(),
+                uDTO.getRuolo().getNome()
+        ));
+      } else {
+        uEntity.setRuolo(null);
+      }
 
-            em.persist(uEntity);
-            transaction.commit();
-        } catch (Exception ex) {
-            transaction.rollback();
-            throw new BlogException(ex);
-        } finally {
-            em.close();
-            emf.close();
-        }
+      em.persist(uEntity);
+      transaction.commit();
+    } catch (Exception ex) {
+      transaction.rollback();
+      throw new BlogException(ex);
+    } finally {
+      em.close();
+      emf.close();
     }
+  }
+
+  public String login(String path, String email, String password) {
+    try {
+      UtenteEntity uEntity = loadUtenteByEmail(email);
+      UtenteDTO uDTO = this.UtenteEntityToUtenteDTO(uEntity);
+      uDTO.setPassword(uEntity.getPassword());
+      if (password.equals(uDTO.getPassword())) {
+        Authentication auth = new Authentication();
+        return auth.getJWS(path, uDTO.getEmail(), uDTO.getRuolo().getNome());
+      }
+      return "wrong password";
+    } catch (BlogException ex) {
+      return "Could not create a JWS string";
+    }
+  }
 }

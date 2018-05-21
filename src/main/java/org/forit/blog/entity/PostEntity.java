@@ -42,7 +42,7 @@ public class PostEntity implements Serializable{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY) // id e' generato automaticamente. Identity = campo autoincrementante
   @Column(name = "ID", unique = true, nullable = false)
-  private long id;
+  private long id = -1;
 
   @Column(name = "TITOLO", unique = true, nullable = true)
   private String titolo;

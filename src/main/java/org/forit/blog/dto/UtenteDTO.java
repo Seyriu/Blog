@@ -5,21 +5,32 @@
  */
 package org.forit.blog.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDate;
 import java.util.Objects;
+import org.forit.netflix.serializer.LocalDateDeserializer;
+import org.forit.netflix.serializer.LocalDateSerializer;
 
 /**
  *
  * @author Utente
  */
 public class UtenteDTO {
+
   private long id;
   private String email;
   private String password;
   private Boolean isActive;
   private int failedAccessAttempts;
   private Boolean isBanned;
+
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonSerialize(using = LocalDateSerializer.class)
   private LocalDate dateCreation;
+
+  @JsonDeserialize(using = LocalDateDeserializer.class)
+  @JsonSerialize(using = LocalDateSerializer.class)
   private LocalDate dateLastAccess;
   private RuoloDTO ruolo;
 
@@ -93,12 +104,28 @@ public class UtenteDTO {
     this.dateCreation = dateCreation;
   }
 
+  public String getDateCreationAsString() {
+    return dateCreation.toString();
+  }
+
+  public void setDateCreationAsString(String creationDate) {
+    this.dateCreation = LocalDate.parse(creationDate);
+  }
+
   public LocalDate getDateLastAccess() {
     return dateLastAccess;
   }
 
   public void setDateLastAccess(LocalDate dateLastAccess) {
     this.dateLastAccess = dateLastAccess;
+  }
+
+  public String getDateLastAccessAsString() {
+    return dateLastAccess.toString();
+  }
+
+  public void setDateLastAccessAsString(String lastAccess) {
+    this.dateLastAccess = LocalDate.parse(lastAccess);
   }
 
   public RuoloDTO getRuolo() {

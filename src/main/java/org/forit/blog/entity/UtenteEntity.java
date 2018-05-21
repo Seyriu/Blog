@@ -27,14 +27,16 @@ import javax.persistence.Table;
 @Table(name = "utente")
 @NamedQueries({
   @NamedQuery(name = "utente.selectAll",
-          query = "SELECT u from UtenteEntity u Order by u.email")
+          query = "SELECT u from UtenteEntity u Order by u.email"),
+  @NamedQuery(name = "utente.selectUserByEmail",
+          query = "SELECT u from UtenteEntity u where u.email LIKE :email")
 })
 public class UtenteEntity implements Serializable{
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY) // id e' generato automaticamente. Identity = campo autoincrementante
   @Column(name = "ID", unique = true, nullable = false)
-  private long id;
+  private long id = -1;
 
   @Column(name = "EMAIL", unique = true, nullable = false)
   private String email;

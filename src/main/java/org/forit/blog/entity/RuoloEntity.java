@@ -31,7 +31,7 @@ public class RuoloEntity implements Serializable{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY) // id e' generato automaticamente. Identity = campo autoincrementante
   @Column(name = "ID", unique = true, nullable = false)
-  private long id;
+  private long id = -1;
 
   @Column(name = "NOME", unique = false, nullable = true)
   private String nome;
