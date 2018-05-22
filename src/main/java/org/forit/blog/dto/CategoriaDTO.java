@@ -5,6 +5,7 @@
  */
 package org.forit.blog.dto;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -16,6 +17,7 @@ public class CategoriaDTO {
   private String nome;
   private String descrizione;
   private String immagine;
+  private List<PostDTO> posts;
 
   public CategoriaDTO() {
   }
@@ -57,6 +59,14 @@ public class CategoriaDTO {
 
   public void setImmagine(String immagine) {
     this.immagine = immagine;
+  }
+
+  public List<PostDTO> getPosts() {
+    return posts;
+  }
+
+  public void setPosts(List<PostDTO> posts) {
+    this.posts = posts;
   }
 
   @Override

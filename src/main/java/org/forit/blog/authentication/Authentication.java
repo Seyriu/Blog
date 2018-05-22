@@ -14,10 +14,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
 import org.forit.blog.exceptions.BlogException;
 
 /**

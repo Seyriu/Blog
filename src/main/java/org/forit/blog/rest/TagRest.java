@@ -51,7 +51,7 @@ public class TagRest {
   @DELETE
   @Consumes("application/json")
   @Produces("application/json")
-  public boolean deleteMateria(@PathParam("id") Long id) {
+  public boolean deleteTag(@PathParam("id") Long id) {
     try {
       TagDAO mdao = new TagDAO();
       mdao.deleteTag(id);

@@ -6,11 +6,18 @@
 package org.forit.blog.rest;
 
 import java.util.List;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import org.forit.blog.authentication.Authentication;
 import org.forit.blog.dao.CategoriaDAO;
+import org.forit.blog.dao.UtenteDAO;
 import org.forit.blog.dto.CategoriaDTO;
+import org.forit.blog.dto.UtenteDTO;
+import org.forit.blog.exceptions.BlogException;
 
 /**
  *
@@ -25,6 +32,15 @@ public class CategoriaRest {
   public List<CategoriaDTO> loadCategorie() {
     CategoriaDAO cDAO = new CategoriaDAO();
     return cDAO.getListaCategorie();
+  }
+
+  @Path("/{id}")
+  @GET
+  @Consumes("application/json")
+  @Produces("application/json")
+  public CategoriaDTO loadCategoria(@PathParam("id") Long id) {
+        CategoriaDAO cDAO = new CategoriaDAO();
+        return cDAO.loadCategoria(id);
   }
     
 }
