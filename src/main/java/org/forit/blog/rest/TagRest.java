@@ -61,4 +61,13 @@ public class TagRest {
       return false;
     }
   }
+  
+  @Path("/{id}")
+  @GET
+  @Consumes("application/json")
+  @Produces("application/json")
+  public TagDTO loadTag(@PathParam("id") Long id) {
+      TagDAO mdao = new TagDAO();
+      return mdao.loadTag(id);
+  }
 }

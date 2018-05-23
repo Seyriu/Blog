@@ -5,6 +5,8 @@
  */
 package org.forit.blog.dao;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
@@ -23,6 +25,13 @@ import org.forit.blog.exceptions.BlogException;
  */
 public class TagDAO {
 
+  public TagDTO TagEntityToTagDTO(TagEntity tEntity) {
+    return new TagDTO(
+            tEntity.getId(),
+            tEntity.getNome()
+    );
+  }
+
   public List<TagDTO> loadListaTag() {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu");
     EntityManager em = emf.createEntityManager();
@@ -39,17 +48,25 @@ public class TagDAO {
         PostDAO pDAO = new PostDAO();
         return pDAO.postEntityToPostDTO(pxtEntity.getPostEntity());
       }).collect(Collectors.toList());
-      
+
       tagDTO.setPosts(posts);
-      
+
       return tagDTO;
     }).collect(Collectors.toList());
 
     em.close();
     emf.close();
+
+    // Sorting
+    Collections.sort(tDTO, new Comparator<TagDTO>() {
+      @Override
+      public int compare(TagDTO tag1, TagDTO tag2) {
+        return tag2.getPosts().size() - tag1.getPosts().size();
+      }
+    });
     return tDTO;
   }
-  
+
   public void insertTag(TagDTO tDTO) throws BlogException {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
     EntityManager em = emf.createEntityManager();
@@ -71,7 +88,7 @@ public class TagDAO {
       emf.close();
     }
   }
-  
+
   public void deleteTag(long id) throws BlogException {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
     EntityManager em = emf.createEntityManager();
@@ -79,7 +96,7 @@ public class TagDAO {
     EntityTransaction transaction = em.getTransaction();
     try {
       transaction.begin();
-      
+
       TagEntity tEntity = em.find(TagEntity.class, id);
       em.remove(tEntity);
 
@@ -92,4 +109,20 @@ public class TagDAO {
       emf.close();
     }
   }
+
+  public TagDTO loadTag(long id) {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+    EntityManager em = emf.createEntityManager();
+    TagEntity tEntity = em.find(TagEntity.class, id);
+    TagDTO tDTO = TagEntityToTagDTO(tEntity);
+    PostDAO pDAO = new PostDAO();
+    tDTO.setPosts(tEntity.getPost().stream().map(pEnt -> {
+      return pDAO.postEntityToPostDTO(pEnt.getPostEntity());
+    }).collect(Collectors.toList()));
+    em.close();
+    emf.close();
+
+    return tDTO;
+  }
+
 }

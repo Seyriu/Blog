@@ -78,7 +78,7 @@ public class PostEntity implements Serializable{
   public PostEntity() {
   }
 
-  public PostEntity(long id, String titolo, String descrizione, String autore, LocalDate dataPost, Boolean visibile, Integer visite, CategoriaEntity categoria) {
+  public PostEntity(long id, String titolo, String descrizione, LocalDate dataPost, Boolean visibile, Integer visite, CategoriaEntity categoria, UtenteEntity utente) {
     this.id = id;
     this.titolo = titolo;
     this.descrizione = descrizione;
@@ -86,6 +86,7 @@ public class PostEntity implements Serializable{
     this.visibile = visibile;
     this.visite = visite;
     this.categoria = categoria;
+    this.utente = utente;
   }
 
   public long getId() {

@@ -17,8 +17,12 @@ import org.forit.blog.dto.CommentoDTO;
 import org.forit.blog.dto.PostDTO;
 import org.forit.blog.dto.RuoloDTO;
 import org.forit.blog.dto.UtenteDTO;
-import org.forit.blog.entity.CommentoEntity;
+import org.forit.blog.entity.CategoriaEntity;
 import org.forit.blog.entity.PostEntity;
+import org.forit.blog.entity.PostPerTagEntity;
+import org.forit.blog.entity.RuoloEntity;
+import org.forit.blog.entity.TagEntity;
+import org.forit.blog.entity.UtenteEntity;
 import org.forit.blog.exceptions.BlogException;
 
 /**
@@ -75,6 +79,52 @@ public class PostDAO {
     return pDTO;
   }
 
+  public PostEntity postDTOToPostEntity(PostDTO pDTO) {
+
+    CategoriaEntity cEntity = null;
+    UtenteEntity uEntity = null;
+
+    if (pDTO.getCategoria() != null) {
+      CategoriaDAO cDAO = new CategoriaDAO();
+      cEntity = cDAO.CategoriaDtoToCategoriaEntity(pDTO.getCategoria());
+    }
+
+    if (pDTO.getUtente() != null) {
+
+      RuoloEntity rEntity = null;
+
+      if (pDTO.getUtente().getRuolo() != null) {
+        rEntity = new RuoloEntity(
+                pDTO.getUtente().getRuolo().getId(),
+                pDTO.getUtente().getRuolo().getNome()
+        );
+      }
+
+      uEntity = new UtenteEntity(
+              pDTO.getUtente().getId(),
+              pDTO.getUtente().getEmail(),
+              pDTO.getUtente().getPassword(),
+              pDTO.getUtente().getIsActive(),
+              pDTO.getUtente().getFailedAccessAttempts(),
+              pDTO.getUtente().getIsBanned(),
+              pDTO.getUtente().getDateCreation(),
+              pDTO.getUtente().getDateLastAccess(),
+              rEntity);
+    }
+
+    PostEntity postEntity = new PostEntity(
+            pDTO.getId(),
+            pDTO.getTitolo(),
+            pDTO.getDescrizione(),
+            pDTO.getDataPost(),
+            pDTO.getVisibile(),
+            pDTO.getVisite(),
+            cEntity,
+            uEntity);
+
+    return postEntity;
+  }
+
   public List<PostDTO> getListaPost() {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
     EntityManager em = emf.createEntityManager();
@@ -96,18 +146,57 @@ public class PostDAO {
 
     return pDTO;
   }
-  
-  public void deletePost(long id) throws BlogException{
+
+  public void deletePost(long id) throws BlogException {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
     EntityManager em = emf.createEntityManager();
 
     EntityTransaction transaction = em.getTransaction();
     try {
       transaction.begin();
-      
+
       PostEntity post = em.find(PostEntity.class, id);
       em.remove(post);
 
+      transaction.commit();
+    } catch (Exception ex) {
+      transaction.rollback();
+      throw new BlogException(ex);
+    } finally {
+      em.close();
+      emf.close();
+    }
+  }
+
+  public void insertPost(PostDTO pDTO) throws BlogException {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+    EntityManager em = emf.createEntityManager();
+
+    EntityTransaction transaction = em.getTransaction();
+    try {
+      transaction.begin();
+
+      CategoriaDAO cDAO = new CategoriaDAO();
+      UtenteDAO uDAO = new UtenteDAO();
+      PostEntity pEntity = new PostEntity();
+      pEntity.setCategoria(cDAO.CategoriaDtoToCategoriaEntity(pDTO.getCategoria()));
+      pEntity.setCommenti(null);
+      pEntity.setDataPost(pDTO.getDataPost());
+      pEntity.setDescrizione(pDTO.getDescrizione());
+      pEntity.setTitolo(pDTO.getTitolo());
+      pEntity.setUtente(uDAO.utenteDTOToUtenteEntity(pDTO.getUtente()));
+
+      pEntity.setTag(pDTO.getTags().stream().map(postDTO -> {
+        PostPerTagEntity pxt = new PostPerTagEntity(pEntity, new TagEntity(
+                postDTO.getId(),
+                postDTO.getNome()
+        ));
+        
+        return pxt;
+      }).collect(Collectors.toList())
+      );
+
+      em.persist(pEntity);
       transaction.commit();
     } catch (Exception ex) {
       transaction.rollback();

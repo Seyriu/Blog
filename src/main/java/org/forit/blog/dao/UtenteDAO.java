@@ -46,6 +46,28 @@ public class UtenteDAO {
             rDTO);
 
     return uDTO;
+  }public UtenteEntity utenteDTOToUtenteEntity(UtenteDTO uDTO) {
+    RuoloEntity rEntity = null;
+
+    if (uDTO.getRuolo() != null) {
+      rEntity = new RuoloEntity(
+              uDTO.getRuolo().getId(),
+              uDTO.getRuolo().getNome()
+      );
+    }
+
+    UtenteEntity uEntity = new UtenteEntity(
+            uDTO.getId(),
+            uDTO.getEmail(),
+            uDTO.getPassword(),
+            uDTO.getIsActive(),
+            uDTO.getFailedAccessAttempts(),
+            uDTO.getIsBanned(),
+            uDTO.getDateCreation(),
+            uDTO.getDateLastAccess(),
+            rEntity);
+
+    return uEntity;
   }
 
   public List<UtenteDTO> getListaUtenti() {

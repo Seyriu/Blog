@@ -13,6 +13,8 @@ import org.forit.blog.dto.CommentoDTO;
 import org.forit.blog.dto.PostDTO;
 import org.forit.blog.dto.UtenteDTO;
 import org.forit.blog.entity.CommentoEntity;
+import org.forit.blog.entity.PostEntity;
+import org.forit.blog.entity.UtenteEntity;
 import org.forit.blog.exceptions.BlogException;
 
 /**
@@ -33,6 +35,7 @@ public class CommentoDAO {
     if (cEntity.getUtente()!= null) {
       uDTO = uDAO.UtenteEntityToUtenteDTO(cEntity.getUtente());
     }
+    
 
     CommentoDTO cDTO = new CommentoDTO(
             cEntity.getId(),
@@ -47,6 +50,37 @@ public class CommentoDAO {
             
 
     return cDTO;
+  }
+  
+  
+  public CommentoEntity CommentoDTOToCommentoEntity(CommentoDTO cDTO) {
+    PostEntity pEntity = null;
+    PostDAO pDAO = new PostDAO();
+    UtenteEntity uEntity = null;
+    UtenteDAO uDAO = new UtenteDAO();
+
+    if (cDTO.getPost()!= null) {
+      pEntity = pDAO.postDTOToPostEntity(cDTO.getPost());
+    }
+
+    if (cDTO.getUtente()!= null) {
+      uEntity = uDAO.utenteDTOToUtenteEntity(cDTO.getUtente());
+    }
+    
+
+    CommentoEntity commentoEntity = new CommentoEntity(
+            cDTO.getId(),
+            cDTO.getTesto(),
+            cDTO.getDataInserimento(),
+            cDTO.getRisposta(),
+            cDTO.getDataRisposta(),
+            cDTO.getVisibile(),
+            pEntity,
+            uEntity
+    );
+            
+
+    return commentoEntity;
   }
   
   public void deleteCommento(long id) throws BlogException {

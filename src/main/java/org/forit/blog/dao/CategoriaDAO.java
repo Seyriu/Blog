@@ -13,7 +13,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import org.forit.blog.dto.CategoriaDTO;
 import org.forit.blog.entity.CategoriaEntity;
-import org.forit.blog.entity.UtenteEntity;
 
 /**
  *
@@ -28,6 +27,15 @@ public class CategoriaDAO {
             cEntity.getDescrizione(),
             cEntity.getImmagine());
   }
+
+  public CategoriaEntity CategoriaDtoToCategoriaEntity(CategoriaDTO cdto) {
+    return new CategoriaEntity(
+            cdto.getId(),
+            cdto.getNome(),
+            cdto.getDescrizione(),
+            cdto.getImmagine());
+  }
+
 
   public List<CategoriaDTO> getListaCategorie() {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
