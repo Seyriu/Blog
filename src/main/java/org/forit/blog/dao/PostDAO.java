@@ -132,12 +132,12 @@ public class PostDAO {
         List<PostDTO> pDTO = list.stream().map(pEnt -> {
             PostDAO pDAO = new PostDAO();
             PostDTO postDTO = pDAO.postEntityToPostDTO(pEnt);
-            CommentoDAO cDAO = new CommentoDAO();
-
-            List<CommentoDTO> cDTO = pEnt.getCommenti().stream().map(cEnt -> {
-                return cDAO.CommentoEntityToCommentoDTO(cEnt);
-            }).collect(Collectors.toList());
-            postDTO.setCommenti(cDTO);
+//            CommentoDAO cDAO = new CommentoDAO();
+//
+//            List<CommentoDTO> cDTO = pEnt.getCommenti().stream().map(cEnt -> {
+//                return cDAO.CommentoEntityToCommentoDTO(cEnt);
+//            }).collect(Collectors.toList());
+//            postDTO.setCommenti(cDTO);
             return postDTO;
         }).collect(Collectors.toList());
         em.close();
@@ -190,43 +190,45 @@ public class PostDAO {
         }
     }
 
-//  public void insertPost(PostDTO pDTO) throws BlogException {
-//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
-//    EntityManager em = emf.createEntityManager();
-//
-//    EntityTransaction transaction = em.getTransaction();
-//    try {
-//      transaction.begin();
-//
-//      CategoriaDAO cDAO = new CategoriaDAO();
-//      UtenteDAO uDAO = new UtenteDAO();
-//      PostEntity pEntity = new PostEntity();
-//      pEntity.setCategoria(cDAO.CategoriaDtoToCategoriaEntity(pDTO.getCategoria()));
-//      pEntity.setCommenti(null);
-//      pEntity.setDataPost(pDTO.getDataPost());
-//      pEntity.setDescrizione(pDTO.getDescrizione());
-//      pEntity.setTitolo(pDTO.getTitolo());
-//      pEntity.setUtente(uDAO.utenteDTOToUtenteEntity(pDTO.getUtente()));
-//
-//      pEntity.setTag(null);
+  public void insertPost(PostDTO pDTO) throws BlogException {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+    EntityManager em = emf.createEntityManager();
+
+    EntityTransaction transaction = em.getTransaction();
+    try {
+      transaction.begin();
+
+      CategoriaDAO cDAO = new CategoriaDAO();
+      UtenteDAO uDAO = new UtenteDAO();
+      PostEntity pEntity = new PostEntity();
+      pEntity.setCategoria(cDAO.CategoriaDtoToCategoriaEntity(pDTO.getCategoria()));
+      pEntity.setCommenti(null);
+      pEntity.setVisite(pDTO.getVisite());
+      pEntity.setVisibile(pDTO.getVisibile());
+      pEntity.setDataPost(pDTO.getDataPost());
+      pEntity.setDescrizione(pDTO.getDescrizione());
+      pEntity.setTitolo(pDTO.getTitolo());
+      pEntity.setUtente(uDAO.utenteDTOToUtenteEntity(pDTO.getUtente()));
+
+      pEntity.setTag(null);
 //      pEntity.setTag(pDTO.getTags().stream().map(postDTO -> {
 //        PostPerTagEntity pxt = new PostPerTagEntity(pEntity, new TagEntity(
 //                postDTO.getId(),
 //                postDTO.getNome()
 //        ));
-//        
+        
 //        return pxt;
 //      }).collect(Collectors.toList())
 //      );
-//
-//      em.persist(pEntity);
-//      transaction.commit();
-//    } catch (Exception ex) {
-//      transaction.rollback();
-//      throw new BlogException(ex);
-//    } finally {
-//      em.close();
-//      emf.close();
-//    }
-//  }
+
+      em.persist(pEntity);
+      transaction.commit();
+    } catch (Exception ex) {
+      transaction.rollback();
+      throw new BlogException(ex);
+    } finally {
+      em.close();
+      emf.close();
+    }
+  }
 }

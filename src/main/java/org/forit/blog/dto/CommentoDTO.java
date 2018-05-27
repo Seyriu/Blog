@@ -61,6 +61,14 @@ public class CommentoDTO {
     this.dataInserimento = dataInserimento;
   }
 
+  public String getDataInserimentoAsString() {
+    return dataInserimento.toString();
+  }
+
+  public void setDataInserimentoAsString(String lastAccess) {
+    this.dataInserimento = LocalDate.parse(lastAccess);
+  }
+
   public String getRisposta() {
     return risposta;
   }
@@ -75,6 +83,14 @@ public class CommentoDTO {
 
   public void setDataRisposta(LocalDate dataRisposta) {
     this.dataRisposta = dataRisposta;
+  }
+
+  public String getDataRispostaAsString() {
+    return dataRisposta.toString();
+  }
+
+  public void setDataRispostaAsString(String lastAccess) {
+    this.dataRisposta = LocalDate.parse(lastAccess);
   }
 
   public Boolean getVisibile() {

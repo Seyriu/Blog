@@ -15,7 +15,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import org.forit.blog.dao.PostDAO;
+import org.forit.blog.dto.CategoriaDTO;
 import org.forit.blog.dto.PostDTO;
+import org.forit.blog.dto.UtenteDTO;
 import org.forit.blog.exceptions.BlogException;
 
 /**
@@ -56,19 +58,18 @@ public class PostRest {
     }
   }
   
-//  @Path("/")
-//  @POST
-//  @Consumes("application/json")
-//  @Produces("application/json")
-//  public boolean insertPost(String titolo, CategoriaDTO categoria, String testo, UtenteDTO uDTO) {
-//    try {
-//      PostDTO pDTO = new PostDTO(-1, titolo, testo, LocalDate.now(), true, 0, categoria, uDTO);
-//      PostDAO pDAO = new PostDAO();
-//      pDAO.insertPost(pDTO);
-//      return true;
-//    } catch (BlogException ex) {
-//      System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());
-//      return false;
-//    }
-//  }
+  @Path("/")
+  @POST
+  @Consumes("application/json")
+  @Produces("application/json")
+  public boolean insertPost(PostDTO pDTO) {
+    try {
+      PostDAO pDAO = new PostDAO();
+      pDAO.insertPost(pDTO);
+      return true;
+    } catch (BlogException ex) {
+      System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());
+      return false;
+    }
+  }
 }

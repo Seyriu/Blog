@@ -71,6 +71,14 @@ public class PostDTO {
     this.dataPost = dataPost;
   }
 
+  public String getDataPostAsString() {
+    return dataPost.toString();
+  }
+
+  public void setDataPostAsString(String lastAccess) {
+    this.dataPost = LocalDate.parse(lastAccess);
+  }
+
   public Boolean getVisibile() {
     return visibile;
   }

@@ -121,7 +121,7 @@ public class UtenteDAO {
       uEntity.setEmail(uDTO.getEmail());
       uEntity.setPassword(uDTO.getPassword());
       uEntity.setDateCreation(uDTO.getDateCreation());
-      uEntity.setDateLastAccess(null);
+      uEntity.setDateLastAccess(uDTO.getDateLastAccess());
       uEntity.setFailed_access_attempts(0);
       uEntity.setIsActive(uDTO.getIsActive());
       uEntity.setIsBanned(uDTO.getIsBanned());

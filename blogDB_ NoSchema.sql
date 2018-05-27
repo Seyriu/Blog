@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `blog` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `blog`;
 -- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
 --
 -- Host: localhost    Database: blog
@@ -98,7 +96,7 @@ CREATE TABLE `post` (
   KEY `id_utente` (`id_utente`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`),
   CONSTRAINT `post_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +105,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,1,1,'Lo scudetto va al Fidelis Andria','Annata speciale per il Fidelis Andria!','2017-05-07 00:00:00',0,125),(2,2,1,'tofu','tofu... per tutti i piatti','2018-05-07 11:15:19',0,43),(3,3,1,'Le gerbere fioriscono','bellissime le gerbere fiorite','2018-05-07 10:29:37',0,0),(4,4,1,'I risvoltini','Risvoltini per tutti i gusti. Peggio degli involtini','2018-05-04 17:12:00',1,72);
+INSERT INTO `post` VALUES (1,1,1,'Lo scudetto va al Fidelis Andria','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2017-05-07 00:00:00',0,125),(2,2,1,'tofu','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2018-05-07 11:15:19',1,43),(3,3,1,'Le gerbere fioriscono','bellissime le gerbere fiorite','2018-05-07 10:29:37',1,0),(4,4,1,'I risvoltini','Risvoltini per tutti i gusti. Peggio degli involtini','2018-05-04 17:12:00',1,72),(5,1,1,'ciambella','Ciambelle giganti!','2018-05-20 00:00:00',1,125),(6,4,1,'titolo','post','2018-05-27 00:00:00',1,0);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +132,7 @@ CREATE TABLE `post_tag` (
 
 LOCK TABLES `post_tag` WRITE;
 /*!40000 ALTER TABLE `post_tag` DISABLE KEYS */;
-INSERT INTO `post_tag` VALUES (1,4),(2,2),(2,8);
+INSERT INTO `post_tag` VALUES (1,4),(2,2),(2,8),(3,1),(3,2),(4,4),(4,6);
 /*!40000 ALTER TABLE `post_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,10 +202,10 @@ CREATE TABLE `utente` (
   `date_last_access` datetime DEFAULT NULL,
   `id_ruolo` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `id_ruolo` (`id_ruolo`),
   CONSTRAINT `utente_ibfk_1` FOREIGN KEY (`id_ruolo`) REFERENCES `ruolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +214,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (1,'admin@admin.com','admin',1,0,0,'2018-05-01 09:25:00','2018-05-14 07:08:00',1);
+INSERT INTO `utente` VALUES (1,'admin@admin.com','admin',1,0,0,'2018-05-01 09:25:00','2018-05-14 07:08:00',1),(15,'user7@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(16,'user8@user.com','user',0,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3),(17,'user9@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(19,'user10@user.com','user',0,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3),(25,'user2@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(26,'user3@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(28,'user4@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(30,'user6@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',NULL),(32,'user5@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',NULL),(34,'user11@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',NULL),(35,'user12@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',NULL);
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -229,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-20 15:25:10
+-- Dump completed on 2018-05-28  0:02:27

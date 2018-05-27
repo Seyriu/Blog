@@ -8,11 +8,14 @@
 	"order": [
 		"19e939d7-c0c5-4612-82ad-8f08ea06c7b6",
 		"a3e5da59-d5a4-4670-9c85-965039ace5b7",
+		"9a1c15ae-cf7e-43bd-8b0a-d8fdacf95986",
+		"ef1402f0-9f6d-4800-b5cc-61c1cdba6d36",
 		"72962527-1838-446b-a535-9667dc89f22c",
 		"9edc1d17-517f-4b48-bdbf-98603bb5e850",
 		"96c9d23b-b532-444d-b7c2-b2b21bad4136",
 		"4bfdd84d-d7b6-4a64-bc2c-51c27abdf67e",
 		"e262f548-8a8b-4c68-9021-3d3e07ff13b8",
+		"913100ef-0477-4ecc-bf64-4367d09e2c43",
 		"7af665b1-826f-4761-843b-bb2d0e831ae7",
 		"718602d3-468f-4afe-b905-3913266484ef",
 		"bfbeb6d7-63e5-4241-852f-a0eb85379b12"
@@ -102,7 +105,7 @@
 			"auth": null,
 			"events": [],
 			"folder": null,
-			"rawModeData": " {\n        \"email\": \"user@user.com\",\n        \"password\": \"password\",\n        \"isActive\": false,\n        \"failedAccessAttempts\": 0,\n        \"isBanned\": false,\n        \"dateCreation\": \"2018-05-18\",\n        \"dateLastAccess\": null,\n        \"ruolo\": {\n            \"id\": 3,\n            \"nome\": \"utente\"\n        }\n    }",
+			"rawModeData": "\t{\n \t\t\"id\": null,\n        \"email\": \"user26@user.com\",\n        \"password\": \"user\",\n        \"isActive\": false,\n        \"failedAccessAttempts\": 0,\n        \"isBanned\": false,\n        \"dateCreationAsString\": \"2018-05-18\",\n        \"dateLastAccessAsString\": \"2018-05-18\",\n        \"ruolo\": {\n            \"id\": 3,\n            \"nome\": \"utente\"\n        }\n    }",
 			"headers": "Content-Type: application/json\n",
 			"pathVariables": {}
 		},
@@ -130,6 +133,29 @@
 			"pathVariables": {}
 		},
 		{
+			"id": "913100ef-0477-4ecc-bf64-4367d09e2c43",
+			"name": "add post",
+			"url": "http://localhost:8080/blog/rest/posts",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": " {\n        \"id\": null,\n        \"titolo\": \"ciambella\",\n        \"descrizione\": \"Ciambelle giganti!\",\n        \"dataPostAsString\": \"2018-05-20\",\n        \"visibile\": \"false\",\n        \"visite\": 125,\n        \"categoria\": {\n            \"id\": 1,\n            \"nome\": \"sport\",\n            \"descrizione\": \"tutti gli sport del mondo\",\n            \"immagine\": null\n        },\n        \"utente\": {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"password\": null,\n            \"isActive\": true,\n            \"failedAccessAttempts\": 0,\n            \"isBanned\": false,\n            \"dateCreationAsString\": \"2018-05-20\",\n            \"dateLastAccessAsString\":\"2018-05-20\",\n            \"ruolo\": {\n                \"id\": 1,\n                \"nome\": \"administrator\"\n            }\n        },\n        \"commenti\": null,\n        \"tags\": null\n    }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
 			"id": "96c9d23b-b532-444d-b7c2-b2b21bad4136",
 			"name": "getListaCategorie",
 			"url": "http://localhost:8080/blog/rest/categorie",
@@ -147,9 +173,33 @@
 			"pathVariables": {}
 		},
 		{
+			"id": "9a1c15ae-cf7e-43bd-8b0a-d8fdacf95986",
+			"name": "getUtente",
+			"url": "http://localhost:8080/blog/rest/utenti/1",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "jwt",
+					"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIvbG9naW4iLCJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwic2NvcGUiOiJhZG1pbmlzdHJhdG9yIn0.FKFTfkhsgUhG6S8cuZRLS3f4-W7v8e8Zw7mDlZ6kdnQ",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "jwt: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIvbG9naW4iLCJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwic2NvcGUiOiJhZG1pbmlzdHJhdG9yIn0.FKFTfkhsgUhG6S8cuZRLS3f4-W7v8e8Zw7mDlZ6kdnQ\n",
+			"pathVariables": {}
+		},
+		{
 			"id": "9edc1d17-517f-4b48-bdbf-98603bb5e850",
 			"name": "getListaPost",
-			"url": "http://localhost:8080/blog/rest/utenti",
+			"url": "http://localhost:8080/blog/rest/posts",
 			"description": "",
 			"data": null,
 			"dataMode": "params",
@@ -166,7 +216,7 @@
 		{
 			"id": "a3e5da59-d5a4-4670-9c85-965039ace5b7",
 			"name": "getListaUtenti",
-			"url": "http://localhost:8080/blog/rest/utenti/eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2Vycy9Uek1Vb2NNRjRwIiwibmFtZSI6IlJvYmVydCBUb2tlbiBNYW4iLCJzY29wZSI6InNlbGYgZ3JvdXBzL2FkbWlucyJ9.CWj7hJUNmzVRkHIjqtDZJtrnWJgeZbfZDsY-zEBV7pw",
+			"url": "http://localhost:8080/blog/rest/utenti",
 			"description": "",
 			"data": null,
 			"dataMode": "params",
@@ -224,6 +274,42 @@
 			"folder": null,
 			"rawModeData": "    {\n        \"email\": \"user@user.com\",\n        \"password\": \"clearPassword\",\n        \"isActive\": false,\n        \"failedAccessAttempts\": 0,\n        \"isBanned\": false,\n        \"dateCreation\": \"2018-04-26\",\n        \"dateLastAccess\": null,\n        \"ruolo\": {\n            \"id\": 3,\n            \"nome\": \"utente\"\n        }\n    }",
 			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "ef1402f0-9f6d-4800-b5cc-61c1cdba6d36",
+			"name": "login",
+			"url": "http://localhost:8080/blog/rest/login",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "email",
+					"value": "admin@admin.com",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "admin",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "path",
+					"value": "/login",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "email: admin@admin.com\npassword: admin\npath: /login\n",
 			"pathVariables": {}
 		}
 	]
