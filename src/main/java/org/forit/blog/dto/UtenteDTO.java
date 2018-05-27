@@ -9,8 +9,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDate;
 import java.util.Objects;
-import org.forit.netflix.serializer.LocalDateDeserializer;
-import org.forit.netflix.serializer.LocalDateSerializer;
+import org.forit.blog.serializer.LocalDateDeserializer;
+import org.forit.blog.serializer.LocalDateSerializer;
 
 /**
  *

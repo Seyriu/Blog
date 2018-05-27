@@ -5,6 +5,7 @@
  */
 package org.forit.blog.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
@@ -109,7 +110,7 @@ public class UtenteDAO {
   }
 
   public void insertUtente(UtenteDTO uDTO) throws BlogException {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu");
     EntityManager em = emf.createEntityManager();
 
     EntityTransaction transaction = em.getTransaction();
@@ -144,18 +145,21 @@ public class UtenteDAO {
     }
   }
 
-  public String login(String path, String email, String password) {
+  public List<String> login(String path, String email, String password) {
     try {
+        List<String> jwt = new ArrayList<>();
       UtenteEntity uEntity = loadUtenteByEmail(email);
       UtenteDTO uDTO = this.UtenteEntityToUtenteDTO(uEntity);
       uDTO.setPassword(uEntity.getPassword());
       if (password.equals(uDTO.getPassword())) {
         Authentication auth = new Authentication();
-        return auth.getJWS(path, uDTO.getEmail(), uDTO.getRuolo().getNome());
+        jwt.add(auth.getJWS(path, uDTO.getEmail(), uDTO.getRuolo().getNome()));
+        jwt.add(Long.toString(uEntity.getId()));
+        return jwt;
       }
-      return "wrong password";
+      return null;
     } catch (BlogException ex) {
-      return "Could not create a JWS string";
+      return null;
     }
   }
 }
