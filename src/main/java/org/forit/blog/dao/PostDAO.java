@@ -20,7 +20,9 @@ import org.forit.blog.dto.TagDTO;
 import org.forit.blog.dto.UtenteDTO;
 import org.forit.blog.entity.CategoriaEntity;
 import org.forit.blog.entity.PostEntity;
+import org.forit.blog.entity.PostPerTagEntity;
 import org.forit.blog.entity.RuoloEntity;
+import org.forit.blog.entity.TagEntity;
 import org.forit.blog.entity.UtenteEntity;
 import org.forit.blog.exceptions.BlogException;
 
@@ -152,17 +154,16 @@ public class PostDAO {
         PostEntity post = em.find(PostEntity.class, id);
         PostDTO pDTO = this.postEntityToPostDTO(post);
         CommentoDAO cDAO = new CommentoDAO();
-            List<CommentoDTO> cDTO = post.getCommenti().stream().map(cEnt -> {
-                return cDAO.CommentoEntityToCommentoDTO(cEnt);
-            }).collect(Collectors.toList());
-            pDTO.setCommenti(cDTO);
-            
-            
+        List<CommentoDTO> cDTO = post.getCommenti().stream().map(cEnt -> {
+            return cDAO.CommentoEntityToCommentoDTO(cEnt);
+        }).collect(Collectors.toList());
+        pDTO.setCommenti(cDTO);
+
         TagDAO tDAO = new TagDAO();
-            List<TagDTO> tDTO = post.getTag().stream().map(tEnt -> {
-                return tDAO.TagEntityToTagDTO(tEnt.getTagEntity());
-            }).collect(Collectors.toList());
-            pDTO.setTags(tDTO);
+        List<TagDTO> tDTO = post.getTags().stream().map(tEnt -> {
+            return tDAO.TagEntityToTagDTO(tEnt);
+        }).collect(Collectors.toList());
+        pDTO.setTags(tDTO);
         em.close();
         emf.close();
 
@@ -190,45 +191,43 @@ public class PostDAO {
         }
     }
 
-  public void insertPost(PostDTO pDTO) throws BlogException {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
-    EntityManager em = emf.createEntityManager();
+    public void insertPost(PostDTO pDTO) throws BlogException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+        EntityManager em = emf.createEntityManager();
 
-    EntityTransaction transaction = em.getTransaction();
-    try {
-      transaction.begin();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
 
-      CategoriaDAO cDAO = new CategoriaDAO();
-      UtenteDAO uDAO = new UtenteDAO();
-      PostEntity pEntity = new PostEntity();
-      pEntity.setCategoria(cDAO.CategoriaDtoToCategoriaEntity(pDTO.getCategoria()));
-      pEntity.setCommenti(null);
-      pEntity.setVisite(pDTO.getVisite());
-      pEntity.setVisibile(pDTO.getVisibile());
-      pEntity.setDataPost(pDTO.getDataPost());
-      pEntity.setDescrizione(pDTO.getDescrizione());
-      pEntity.setTitolo(pDTO.getTitolo());
-      pEntity.setUtente(uDAO.utenteDTOToUtenteEntity(pDTO.getUtente()));
+            CategoriaDAO cDAO = new CategoriaDAO();
+            UtenteDAO uDAO = new UtenteDAO();
+            PostEntity pEntity = new PostEntity();
+            pEntity.setCategoria(cDAO.CategoriaDtoToCategoriaEntity(pDTO.getCategoria()));
+            pEntity.setCommenti(null);
+            pEntity.setVisite(pDTO.getVisite());
+            pEntity.setVisibile(pDTO.getVisibile());
+            pEntity.setDataPost(pDTO.getDataPost());
+            pEntity.setDescrizione(pDTO.getDescrizione());
+            pEntity.setTitolo(pDTO.getTitolo());
+            pEntity.setUtente(uDAO.utenteDTOToUtenteEntity(pDTO.getUtente()));
 
-      pEntity.setTag(null);
-//      pEntity.setTag(pDTO.getTags().stream().map(postDTO -> {
-//        PostPerTagEntity pxt = new PostPerTagEntity(pEntity, new TagEntity(
-//                postDTO.getId(),
-//                postDTO.getNome()
-//        ));
-        
-//        return pxt;
+//      pEntity.setTag(null);
+//      pEntity.setTags(pDTO.getTags().stream().map(tagDTO -> {
+//        return new TagEntity(tagDTO.getId(), tagDTO.getNome());
 //      }).collect(Collectors.toList())
 //      );
+            pDTO.getTags().stream().forEach(tDTO -> {
+                pEntity.addTag(new TagEntity(tDTO.getId(), tDTO.getNome()));
+            });
 
-      em.persist(pEntity);
-      transaction.commit();
-    } catch (Exception ex) {
-      transaction.rollback();
-      throw new BlogException(ex);
-    } finally {
-      em.close();
-      emf.close();
+            em.persist(pEntity);
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            throw new BlogException(ex);
+        } finally {
+            em.close();
+            emf.close();
+        }
     }
-  }
 }

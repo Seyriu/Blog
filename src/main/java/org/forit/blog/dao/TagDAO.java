@@ -44,9 +44,9 @@ public class TagDAO {
               entity.getId(),
               entity.getNome()
       );
-      List<PostDTO> posts = entity.getPost().stream().map(pxtEntity -> {
+      List<PostDTO> posts = entity.getPosts().stream().map(postEntity -> {
         PostDAO pDAO = new PostDAO();
-        return pDAO.postEntityToPostDTO(pxtEntity.getPostEntity());
+        return pDAO.postEntityToPostDTO(postEntity);
       }).collect(Collectors.toList());
 
       tagDTO.setPosts(posts);
@@ -116,8 +116,8 @@ public class TagDAO {
     TagEntity tEntity = em.find(TagEntity.class, id);
     TagDTO tDTO = TagEntityToTagDTO(tEntity);
     PostDAO pDAO = new PostDAO();
-    tDTO.setPosts(tEntity.getPost().stream().map(pEnt -> {
-      return pDAO.postEntityToPostDTO(pEnt.getPostEntity());
+    tDTO.setPosts(tEntity.getPosts().stream().map(pEnt -> {
+      return pDAO.postEntityToPostDTO(pEnt);
     }).collect(Collectors.toList()));
     em.close();
     emf.close();

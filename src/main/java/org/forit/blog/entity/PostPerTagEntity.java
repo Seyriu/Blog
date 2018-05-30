@@ -34,19 +34,19 @@ public class PostPerTagEntity implements Serializable {
     this.TagEntity = TagEntity;
   }
 
-  public PostEntity getPostEntity() {
+  public PostEntity getPostEntities() {
     return postEntity;
   }
 
-  public void setPostEntity(PostEntity postEntity) {
+  public void setPostEntities(PostEntity postEntity) {
     this.postEntity = postEntity;
   }
 
-  public TagEntity getTagEntity() {
+  public TagEntity getTagEntities() {
     return TagEntity;
   }
 
-  public void setTagEntity(TagEntity TagEntity) {
+  public void setTagEntities(TagEntity TagEntity) {
     this.TagEntity = TagEntity;
   }
 
