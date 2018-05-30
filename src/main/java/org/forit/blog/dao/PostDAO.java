@@ -5,7 +5,10 @@
  */
 package org.forit.blog.dao;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -210,8 +213,13 @@ public class PostDAO {
             pEntity.setTitolo(pDTO.getTitolo());
             pEntity.setUtente(uDAO.utenteDTOToUtenteEntity(pDTO.getUtente()));
 
+            TagDAO tDAO = new TagDAO();
+            // removing duplicates
+            Set<TagDTO> tagSet = new HashSet<>(pDTO.getTags());
+            pDTO.setTags(new ArrayList(tagSet));
+
             pDTO.getTags().stream().forEach(tDTO -> {
-                TagDAO tDAO = new TagDAO();
+
                 if (tDAO.loadTagByName(tDTO.getNome()) == null) {
                     try {
                         tDAO.insertTag(new TagDTO(-1, tDTO.getNome()));
