@@ -20,7 +20,6 @@ import org.forit.blog.dto.TagDTO;
 import org.forit.blog.dto.UtenteDTO;
 import org.forit.blog.entity.CategoriaEntity;
 import org.forit.blog.entity.PostEntity;
-import org.forit.blog.entity.PostPerTagEntity;
 import org.forit.blog.entity.RuoloEntity;
 import org.forit.blog.entity.TagEntity;
 import org.forit.blog.entity.UtenteEntity;
@@ -211,13 +210,17 @@ public class PostDAO {
             pEntity.setTitolo(pDTO.getTitolo());
             pEntity.setUtente(uDAO.utenteDTOToUtenteEntity(pDTO.getUtente()));
 
-//      pEntity.setTag(null);
-//      pEntity.setTags(pDTO.getTags().stream().map(tagDTO -> {
-//        return new TagEntity(tagDTO.getId(), tagDTO.getNome());
-//      }).collect(Collectors.toList())
-//      );
             pDTO.getTags().stream().forEach(tDTO -> {
-                pEntity.addTag(new TagEntity(tDTO.getId(), tDTO.getNome()));
+                TagDAO tDAO = new TagDAO();
+                if (tDAO.loadTagByName(tDTO.getNome()) == null) {
+                    try {
+                        tDAO.insertTag(new TagDTO(-1, tDTO.getNome()));
+                    } catch (BlogException ex) {
+                        System.out.println("Insert Tag Failed: " + ex.getLocalizedMessage());
+                    }
+                }
+                TagDTO tagDTO = tDAO.loadTagByName(tDTO.getNome());
+                pEntity.addTag(new TagEntity(tagDTO.getId(), tagDTO.getNome()));
             });
 
             em.persist(pEntity);

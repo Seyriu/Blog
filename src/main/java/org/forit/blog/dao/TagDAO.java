@@ -67,6 +67,22 @@ public class TagDAO {
     return tDTO;
   }
 
+  public TagDTO loadTagByName(String nome) {
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+    EntityManager em = emf.createEntityManager();
+    TypedQuery<TagEntity> query = em.createNamedQuery("tag.selectTagByName", TagEntity.class)
+            .setParameter("nome", nome);
+    TagDTO tDTO = null;
+    if (query.getResultList().size() > 0) {
+        TagEntity tEntity = query.getResultList().get(0);
+        tDTO = new TagDTO(tEntity.getId(), tEntity.getNome());
+    }
+    em.close();
+    emf.close();
+
+    return tDTO;
+  }
+
   public void insertTag(TagDTO tDTO) throws BlogException {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
     EntityManager em = emf.createEntityManager();

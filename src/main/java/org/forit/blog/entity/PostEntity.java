@@ -71,9 +71,6 @@ public class PostEntity implements Serializable {
             fetch = FetchType.LAZY)
     private List<CommentoEntity> commenti;
 
-//  @ElementCollection()
-//  @CollectionTable(name = "post_tag", joinColumns = @JoinColumn(name = "id_post"))
-//  private List<PostPerTagEntity> tag = new ArrayList<>();
     @ManyToMany()
     @JoinTable(name = "post_tag",
             joinColumns = @JoinColumn(name = "id_post"),

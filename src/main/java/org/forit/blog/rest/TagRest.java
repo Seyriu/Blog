@@ -24,6 +24,14 @@ import org.forit.blog.exceptions.BlogException;
 @Path("/tags")
 public class TagRest {
 
+  @Path("/names/{name}")
+  @GET()
+  @Produces("application/json")
+  public TagDTO getTagByName(@PathParam("name") String name) {
+    TagDAO tagDAO = new TagDAO();
+    return tagDAO.loadTagByName(name);
+  }
+  
   @Path("/")
   @GET()
   @Produces("application/json")

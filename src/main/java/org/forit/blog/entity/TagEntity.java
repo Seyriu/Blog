@@ -40,10 +40,7 @@ public class TagEntity implements Serializable {
 
     @Column(name = "NOME", unique = false, nullable = true)
     private String nome;
-
-//  @ElementCollection()
-//  @CollectionTable(name = "post_tag", joinColumns = @JoinColumn(name = "id_tag"))
-//  private List<PostPerTagEntity> post = new ArrayList<>();
+    
     @ManyToMany(mappedBy = "tags")
     private List<PostEntity> posts = new ArrayList<>();
 
