@@ -24,6 +24,11 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
 
     @Override
     public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        return LocalDate.parse(jp.readValueAs(String.class));
+        try {
+            return LocalDate.parse(jp.readValueAs(String.class));
+        } catch (Exception ex) {
+            System.out.println("Error during deserialization: " + ex);
+        }
+        return null;
     }
 }

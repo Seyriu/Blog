@@ -5,12 +5,16 @@
  */
 package org.forit.blog.rest;
 
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import org.forit.blog.dao.CommentoDAO;
+import org.forit.blog.dto.CommentoDTO;
 import org.forit.blog.exceptions.BlogException;
 
 /**
@@ -19,6 +23,23 @@ import org.forit.blog.exceptions.BlogException;
  */
 @Path("/commenti")
 public class CommentoRest {
+  
+  @Path("/")
+  @GET
+  @Produces("application/json")
+  public List<CommentoDTO> loadCommenti() {
+    CommentoDAO cdao = new CommentoDAO();
+    return cdao.getListaCommenti();
+  }
+  
+  @Path("/{id}")
+  @GET
+  @Produces("application/json")
+  public CommentoDTO loadCommento(@PathParam("id") Long id) {
+    CommentoDAO cDAO = new CommentoDAO();
+    return cDAO.loadCommento(id);
+  }
+  
   @Path("/{id}")
   @DELETE
   @Consumes("application/json")
@@ -27,6 +48,21 @@ public class CommentoRest {
     try {
       CommentoDAO cDAO = new CommentoDAO();
       cDAO.deleteCommento(id);
+      return true;
+    } catch (BlogException ex) {
+      System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());
+      return false;
+    }
+  }
+  
+  @Path("/")
+  @POST
+  @Consumes("application/json")
+  @Produces("application/json")
+  public boolean insertCommento(CommentoDTO cDTO) {
+    try {
+      CommentoDAO cDAO = new CommentoDAO();
+      cDAO.insertCommento(cDTO);
       return true;
     } catch (BlogException ex) {
       System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());

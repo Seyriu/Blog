@@ -31,8 +31,8 @@ public class PostRest {
   @GET
   @Produces("application/json")
   public List<PostDTO> loadPosts() {
-    PostDAO mdao = new PostDAO();
-    return mdao.getListaPost();
+    PostDAO pdao = new PostDAO();
+    return pdao.getListaPost();
   }
   
   @Path("/{id}")
