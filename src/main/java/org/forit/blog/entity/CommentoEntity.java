@@ -49,7 +49,7 @@ public class CommentoEntity implements Serializable {
   private LocalDate dataRisposta;
 
   @Column(name = "VISIBILE", unique = false, nullable = false)
-  private Boolean visibile;
+  private String visibile;
   
   @OneToOne
   @JoinColumn(name="ID_POST")
@@ -62,7 +62,7 @@ public class CommentoEntity implements Serializable {
   public CommentoEntity() {
   }
 
-  public CommentoEntity(long id, String testo, LocalDate dataInserimento, String risposta, LocalDate dataRisposta, Boolean visibile, PostEntity post, UtenteEntity utente) {
+  public CommentoEntity(long id, String testo, LocalDate dataInserimento, String risposta, LocalDate dataRisposta, String visibile, PostEntity post, UtenteEntity utente) {
     this.id = id;
     this.testo = testo;
     this.dataInserimento = dataInserimento;
@@ -113,11 +113,11 @@ public class CommentoEntity implements Serializable {
     this.dataRisposta = dataRisposta;
   }
 
-  public Boolean getVisibile() {
+  public String getVisibile() {
     return visibile;
   }
 
-  public void setVisibile(Boolean visibile) {
+  public void setVisibile(String visibile) {
     this.visibile = visibile;
   }
 

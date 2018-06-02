@@ -29,14 +29,14 @@ public class CommentoDTO {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dataRisposta;
-    private Boolean visibile;
+    private String visibile;
     private PostDTO post;
     private UtenteDTO utente;
 
     public CommentoDTO() {
     }
 
-    public CommentoDTO(long id, String testo, LocalDate dataInserimento, Boolean visibile, PostDTO post, UtenteDTO utente) {
+    public CommentoDTO(long id, String testo, LocalDate dataInserimento, String visibile, PostDTO post, UtenteDTO utente) {
         this.id = id;
         this.testo = testo;
         this.dataInserimento = dataInserimento;
@@ -101,16 +101,16 @@ public class CommentoDTO {
     }
 
     public void setDataRispostaAsString(String lastAccess) {
-        // if (lastAccess != null && !lastAccess.equals("")) {
-        this.dataRisposta = LocalDate.parse(lastAccess);
-        // }
+        if (lastAccess != null && !lastAccess.equals("")) {
+            this.dataRisposta = LocalDate.parse(lastAccess);
+        }
     }
 
-    public Boolean getVisibile() {
+    public String getVisibile() {
         return visibile;
     }
 
-    public void setVisibile(Boolean visibile) {
+    public void setVisibile(String visibile) {
         this.visibile = visibile;
     }
 

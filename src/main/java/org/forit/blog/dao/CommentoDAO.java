@@ -14,7 +14,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import org.forit.blog.dto.CommentoDTO;
 import org.forit.blog.dto.PostDTO;
-import org.forit.blog.dto.TagDTO;
 import org.forit.blog.dto.UtenteDTO;
 import org.forit.blog.entity.CommentoEntity;
 import org.forit.blog.entity.PostEntity;
