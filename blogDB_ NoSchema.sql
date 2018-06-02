@@ -55,14 +55,14 @@ CREATE TABLE `commento` (
   `testo` text NOT NULL,
   `data_risposta` datetime DEFAULT NULL,
   `risposta` text,
-  `visibile` tinyint(1) NOT NULL,
+  `visibile` enum('true','false','unchecked') NOT NULL,
   `id_post` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_post` (`id_post`),
   KEY `id_utente` (`id_utente`),
   CONSTRAINT `commento_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `commento_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `commento` (
 
 LOCK TABLES `commento` WRITE;
 /*!40000 ALTER TABLE `commento` DISABLE KEYS */;
-INSERT INTO `commento` VALUES (1,1,'2018-05-01 09:00:00','il tofu e\' buonissimo!','2018-04-23 12:00:00','e\' proprio vero!',1,2),(2,1,'2018-05-02 05:00:23','Questo e\' un corommento al mentolo!',NULL,NULL,1,3);
+INSERT INTO `commento` VALUES (1,1,'2018-05-01 09:00:00','il tofu e\' buonissimo!','2018-04-23 12:00:00','e\' proprio vero!','true',2),(2,1,'2018-05-02 05:00:23','Questo e\' un corommento al mentolo!',NULL,NULL,'true',3),(3,1,'2018-05-31 00:00:00','Delizioso Ramen!','2018-06-01 00:00:00','e\' proprio vero!','true',2),(4,1,'2018-05-31 00:00:00','Deliziose Tagliatelle!',NULL,NULL,'true',2),(5,1,'2018-06-02 00:00:00','testo di prova',NULL,NULL,'unchecked',2),(6,1,'2018-06-02 00:00:00','evviva il Tofu!',NULL,NULL,'unchecked',2);
 /*!40000 ALTER TABLE `commento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +96,7 @@ CREATE TABLE `post` (
   KEY `id_utente` (`id_utente`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`),
   CONSTRAINT `post_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +105,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,1,1,'Lo scudetto va al Fidelis Andria','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2017-05-07 00:00:00',0,125),(2,2,1,'tofu','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2018-05-07 11:15:19',1,43),(3,3,1,'Le gerbere fioriscono','bellissime le gerbere fiorite','2018-05-07 10:29:37',1,0),(4,4,1,'I risvoltini','Risvoltini per tutti i gusti. Peggio degli involtini','2018-05-04 17:12:00',1,72),(5,1,1,'ciambella','Ciambelle giganti!','2018-05-20 00:00:00',1,125),(6,4,1,'titolo','post','2018-05-27 00:00:00',1,0);
+INSERT INTO `post` VALUES (1,1,1,'Lo scudetto va al Fidelis Andria','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2017-05-07 00:00:00',0,125),(2,2,1,'tofu','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2018-05-07 11:15:19',1,43),(3,3,1,'Le gerbere fioriscono','bellissime le gerbere fiorite','2018-05-07 10:29:37',1,0),(4,4,1,'I risvoltini','Risvoltini per tutti i gusti. Peggio degli involtini','2018-05-04 17:12:00',1,72),(5,1,1,'ciambella','Ciambelle giganti!','2018-05-20 00:00:00',1,125),(6,4,1,'titolo','post','2018-05-27 00:00:00',1,0),(13,1,1,'calcio','A sorpresa, l\'Italia vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(14,1,1,'calcio','Francia vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(16,1,1,'calcio','Spagna vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(17,1,1,'calcio','Germania vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(18,1,1,'calcio','Repubblica Ceca vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(19,3,1,'Gerani','#gerani bellissimi gerani#inFiore#colorati #verdi e#blu','2018-05-30 00:00:00',1,0),(20,4,1,'hubs','#giacche stupende#giacche di tutti i #tipi e ancora #tipi','2018-05-30 00:00:00',1,0),(21,3,1,'I Pioppi','i #pioppi sono bellissimi in questa stagione dell\'#anno !','2018-06-02 00:00:00',1,0);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +132,7 @@ CREATE TABLE `post_tag` (
 
 LOCK TABLES `post_tag` WRITE;
 /*!40000 ALTER TABLE `post_tag` DISABLE KEYS */;
-INSERT INTO `post_tag` VALUES (1,4),(2,2),(2,8),(3,1),(3,2),(4,4),(4,6);
+INSERT INTO `post_tag` VALUES (2,2),(2,8),(3,1),(3,2),(4,4),(4,6),(13,4),(14,4),(17,19),(18,19),(19,20),(19,21),(19,22),(19,23),(19,24),(20,25),(20,26),(21,27),(21,28);
 /*!40000 ALTER TABLE `post_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +171,7 @@ CREATE TABLE `tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +180,7 @@ CREATE TABLE `tag` (
 
 LOCK TABLES `tag` WRITE;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
-INSERT INTO `tag` VALUES (1,'vegetariano'),(2,'vegano'),(3,'running'),(4,'calcio'),(5,'nuoto'),(6,'tennis'),(7,'pioppo'),(8,'leopardo'),(9,'tulipano'),(10,'gerbere'),(11,'fashion'),(12,'fiera di milano'),(16,'Volley'),(17,'Karting');
+INSERT INTO `tag` VALUES (1,'vegetariano'),(2,'vegano'),(3,'running'),(4,'calcio'),(5,'nuoto'),(6,'tennis'),(7,'pioppo'),(8,'leopardo'),(9,'tulipano'),(10,'gerbere'),(11,'fashion'),(12,'fiera di milano'),(16,'Volley'),(17,'Karting'),(18,'calcetto'),(19,'Mondiali'),(20,'gerani'),(21,'inFiore'),(22,'colorati'),(23,'verdi'),(24,'blu'),(25,'giacche'),(26,'tipi'),(27,'pioppi'),(28,'anno');
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-28  0:02:27
+-- Dump completed on 2018-06-02 21:14:03
