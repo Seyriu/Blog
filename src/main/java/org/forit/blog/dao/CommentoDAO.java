@@ -181,4 +181,35 @@ public class CommentoDAO {
             emf.close();
         }
     }
+
+    public void updateCommento(CommentoDTO cDTO, long id) throws BlogException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+        EntityManager em = emf.createEntityManager();
+
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+
+            UtenteDAO uDAO = new UtenteDAO();
+            PostDAO pDAO = new PostDAO();
+            CommentoEntity cEntity = new CommentoEntity();
+            cEntity.setTesto(cDTO.getTesto());
+            cEntity.setDataInserimento(cDTO.getDataInserimento());
+            cEntity.setRisposta(cDTO.getRisposta());
+            cEntity.setDataRisposta(cDTO.getDataRisposta());
+            cEntity.setVisibile(cDTO.getVisibile());
+            cEntity.setDataRisposta(cDTO.getDataRisposta());
+            cEntity.setPost(pDAO.postDTOToPostEntity(cDTO.getPost()));
+            cEntity.setUtente(uDAO.utenteDTOToUtenteEntity(cDTO.getUtente()));
+
+            em.persist(cEntity);
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            throw new BlogException(ex);
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
 }

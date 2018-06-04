@@ -60,7 +60,7 @@ public class UtenteEntity implements Serializable{
   private LocalDate dateLastAccess;
   
   @OneToOne
-  @JoinColumn(name="ID_RUOLO")
+  @JoinColumn(name="id_ruolo")
   private RuoloEntity ruolo;
 
   public UtenteEntity() {

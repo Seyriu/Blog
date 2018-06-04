@@ -37,10 +37,10 @@ public class UtenteRest {
   @GET
   @Consumes("application/json")
   @Produces("application/json")
-  public UtenteDTO loadUtente(@PathParam("id") Long id, @HeaderParam("jwt") String compactJws) {
+  public UtenteDTO loadUtente(@PathParam("id") Long id, @HeaderParam("jwt") String compactJwt) {
     try {
       Authentication auth = new Authentication();
-      if (auth.checkJWSUtenteOrAdmin(compactJws)) {
+      if (auth.checkJWSUtenteOrAdmin(compactJwt)) {
         UtenteDAO uDAO = new UtenteDAO();
         return uDAO.loadUtente(id);
       } else {
