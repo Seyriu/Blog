@@ -77,12 +77,12 @@ public class CommentoRest {
     @PUT
     @Consumes("application/json")
     @Produces("application/json")
-    public boolean updateCommento(CommentoDTO cDTO, @PathParam("id") long id,  @HeaderParam("jwt") String compactJwt) {
+    public boolean updateVisibility(String visibility, @PathParam("id") long id,  @HeaderParam("jwt") String compactJwt) {
         try {
             Authentication auth = new Authentication();
             if (auth.checkJWSAdmin(compactJwt)) {
                 CommentoDAO cDAO = new CommentoDAO();
-                cDAO.updateCommento(cDTO, id);
+                cDAO.updateVisibility(visibility, id);
                 return true;
             } else {
                 return false;
@@ -92,4 +92,24 @@ public class CommentoRest {
             return false;
         }
     }
+
+//    @Path("/{id}")
+//    @PUT
+//    @Consumes("application/json")
+//    @Produces("application/json")
+//    public boolean updateCommento(CommentoDTO cDTO, @PathParam("id") long id,  @HeaderParam("jwt") String compactJwt) {
+//        try {
+//            Authentication auth = new Authentication();
+//            if (auth.checkJWSAdmin(compactJwt)) {
+//                CommentoDAO cDAO = new CommentoDAO();
+//                cDAO.updateCommento(cDTO, id);
+//                return true;
+//            } else {
+//                return false;
+//            }
+//        } catch (BlogException ex) {
+//            System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());
+//            return false;
+//        }
+//    }
 }

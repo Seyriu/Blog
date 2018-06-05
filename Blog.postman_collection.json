@@ -7,11 +7,18 @@
 	"variables": [],
 	"order": [
 		"19e939d7-c0c5-4612-82ad-8f08ea06c7b6",
+		"95fbcc5b-7c59-451b-a546-d5fde31e0871",
 		"a3e5da59-d5a4-4670-9c85-965039ace5b7",
 		"9a1c15ae-cf7e-43bd-8b0a-d8fdacf95986",
+		"070eb5bd-893c-41a9-b0a4-04acfe7c0045",
+		"cf8505b6-dd78-44f2-b13f-c4445d895b70",
 		"ef1402f0-9f6d-4800-b5cc-61c1cdba6d36",
 		"72962527-1838-446b-a535-9667dc89f22c",
+		"57c47806-5c17-451c-9715-10ac531e7851",
+		"93bb9c0a-a632-4a77-af61-fafdecd7197e",
+		"7a13e6f7-dffb-49f2-895b-b62479e7fa74",
 		"9edc1d17-517f-4b48-bdbf-98603bb5e850",
+		"b223eb2e-2bee-4b4a-ac43-34a814e0197f",
 		"96c9d23b-b532-444d-b7c2-b2b21bad4136",
 		"4bfdd84d-d7b6-4a64-bc2c-51c27abdf67e",
 		"e262f548-8a8b-4c68-9021-3d3e07ff13b8",
@@ -23,6 +30,30 @@
 	"folders_order": [],
 	"folders": [],
 	"requests": [
+		{
+			"id": "070eb5bd-893c-41a9-b0a4-04acfe7c0045",
+			"name": "getCommento",
+			"url": "http://localhost:8080/blog/rest/commenti/2",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "jwt",
+					"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIvbG9naW4iLCJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwic2NvcGUiOiJhZG1pbmlzdHJhdG9yIn0.FKFTfkhsgUhG6S8cuZRLS3f4-W7v8e8Zw7mDlZ6kdnQ",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "jwt: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIvbG9naW4iLCJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwic2NvcGUiOiJhZG1pbmlzdHJhdG9yIn0.FKFTfkhsgUhG6S8cuZRLS3f4-W7v8e8Zw7mDlZ6kdnQ\n",
+			"pathVariables": {}
+		},
 		{
 			"id": "19e939d7-c0c5-4612-82ad-8f08ea06c7b6",
 			"name": "getTags",
@@ -60,6 +91,29 @@
 			"events": [],
 			"folder": null,
 			"rawModeData": " {\n    \"nome\": \"Volley\"\n }",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "57c47806-5c17-451c-9715-10ac531e7851",
+			"name": "insert commento",
+			"url": "http://localhost:8080/blog/rest/commenti",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n    \"id\": 1,\n    \"testo\": \"Delizioso Ramen!\",\n    \"risposta\": \"e' proprio vero!\",\n    \"visibile\": true,\n    \"post\": {\n        \"id\": 2,\n        \"titolo\": \"tofu\",\n        \"descrizione\": \"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>\",\n        \"visibile\": true,\n        \"visite\": 43,\n        \"categoria\": {\n            \"id\": 2,\n            \"nome\": \"cucina\",\n            \"descrizione\": \"Tutti i piatti piu' prelibati\",\n            \"immagine\": null,\n            \"posts\": null\n        },\n        \"utente\": {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"password\": null,\n            \"isActive\": true,\n            \"failedAccessAttempts\": 0,\n            \"isBanned\": false,\n            \"dateCreation\": \"2018-05-01\",\n            \"dateLastAccess\": \"2018-05-14\",\n            \"ruolo\": {\n                \"id\": 1,\n                \"nome\": \"administrator\"\n            },\n            \"dateLastAccessAsString\": \"2018-05-14\",\n            \"dateCreationAsString\": \"2018-05-01\"\n        },\n        \"commenti\": null,\n        \"tags\": null,\n        \"dataPostAsString\": \"2018-05-07\"\n    },\n    \"utente\": {\n        \"id\": 1,\n        \"email\": \"admin@admin.com\",\n        \"password\": null,\n        \"isActive\": true,\n        \"failedAccessAttempts\": 0,\n        \"isBanned\": false,\n        \"dateCreation\": \"2018-05-01\",\n        \"dateLastAccess\": \"2018-05-14\",\n        \"ruolo\": {\n            \"id\": 1,\n            \"nome\": \"administrator\"\n        },\n        \"dateLastAccessAsString\": \"2018-05-14\",\n        \"dateCreationAsString\": \"2018-05-01\"\n    },\n    \"dataInserimentoAsString\": \"2018-05-31\",\n    \"dataRispostaAsString\": \"2018-06-01\"\n}",
 			"headers": "Content-Type: application/json\n",
 			"pathVariables": {}
 		},
@@ -110,6 +164,35 @@
 			"pathVariables": {}
 		},
 		{
+			"id": "7a13e6f7-dffb-49f2-895b-b62479e7fa74",
+			"name": "updateVisibility",
+			"url": "http://localhost:8080/blog/rest/commenti/5",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"key": "jwt",
+					"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIvbG9naW4iLCJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwic2NvcGUiOiJhZG1pbmlzdHJhdG9yIn0.FKFTfkhsgUhG6S8cuZRLS3f4-W7v8e8Zw7mDlZ6kdnQ",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "PUT",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "true",
+			"headers": "Content-Type: application/json\njwt: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIvbG9naW4iLCJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwic2NvcGUiOiJhZG1pbmlzdHJhdG9yIn0.FKFTfkhsgUhG6S8cuZRLS3f4-W7v8e8Zw7mDlZ6kdnQ\n",
+			"pathVariables": {}
+		},
+		{
 			"id": "7af665b1-826f-4761-843b-bb2d0e831ae7",
 			"name": "delete tag",
 			"url": "http://localhost:8080/blog/rest/tags/15",
@@ -136,7 +219,7 @@
 			"id": "913100ef-0477-4ecc-bf64-4367d09e2c43",
 			"name": "add post",
 			"url": "http://localhost:8080/blog/rest/posts",
-			"description": "",
+			"description": null,
 			"data": [],
 			"dataMode": "raw",
 			"headerData": [
@@ -151,8 +234,49 @@
 			"auth": null,
 			"events": [],
 			"folder": null,
-			"rawModeData": " {\n        \"id\": null,\n        \"titolo\": \"ciambella\",\n        \"descrizione\": \"Ciambelle giganti!\",\n        \"dataPostAsString\": \"2018-05-20\",\n        \"visibile\": \"false\",\n        \"visite\": 125,\n        \"categoria\": {\n            \"id\": 1,\n            \"nome\": \"sport\",\n            \"descrizione\": \"tutti gli sport del mondo\",\n            \"immagine\": null\n        },\n        \"utente\": {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"password\": null,\n            \"isActive\": true,\n            \"failedAccessAttempts\": 0,\n            \"isBanned\": false,\n            \"dateCreationAsString\": \"2018-05-20\",\n            \"dateLastAccessAsString\":\"2018-05-20\",\n            \"ruolo\": {\n                \"id\": 1,\n                \"nome\": \"administrator\"\n            }\n        },\n        \"commenti\": null,\n        \"tags\": null\n    }",
+			"rawModeData": " {\n        \"id\": null,\n        \"titolo\": \"calcio\",\n        \"descrizione\": \"Repubblica Ceca vince i mondiali 2018!\",\n        \"dataPostAsString\": \"2018-05-20\",\n        \"visibile\": false,\n        \"visite\": 125,\n        \"categoria\": {\n            \"id\": 1,\n            \"nome\": \"sport\",\n            \"descrizione\": \"tutti gli sport del mondo\",\n            \"immagine\": null\n        },\n        \"utente\": {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"password\": null,\n            \"isActive\": true,\n            \"failedAccessAttempts\": 0,\n            \"isBanned\": false,\n            \"dateCreationAsString\": \"2018-05-20\",\n            \"dateLastAccessAsString\":\"2018-05-20\",\n            \"ruolo\": {\n                \"id\": 1,\n                \"nome\": \"administrator\"\n            }\n        },\n        \"commenti\": null,\n        \"tags\": [\n        {\n            \"id\": null,\n            \"nome\": \"Mondiali\",\n            \"posts\": null\n        }\n    ]\n    }",
 			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "93bb9c0a-a632-4a77-af61-fafdecd7197e",
+			"name": "insert commento Copy",
+			"url": "http://localhost:8080/blog/rest/commenti",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": ""
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"rawModeData": "{\n    \"id\": -1,\n    \"testo\": \"testo di prova\",\n    \"dataInserimentoAsString\": \"2018-06-02\",\n    \"dataRispostaAsString\": null,\n    \"risposta\": null,\n    \"visibile\": false,\n    \"post\": {\n        \"id\": 2,\n        \"titolo\": \"tofu\",\n        \"descrizione\": \"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>\",\n        \"dataPostAsString\": \"2018-05-07\",\n        \"visibile\": true,\n        \"visite\": 43,\n        \"categoria\": {\n            \"id\": 2,\n            \"nome\": \"cucina\",\n            \"descrizione\": \"Tutti i piatti piu' prelibati\",\n            \"immagine\": null\n        },\n        \"utente\": {\n            \"id\": 1,\n            \"email\": \"admin@admin.com\",\n            \"password\": null,\n            \"isActive\": true,\n            \"isBanned\": false,\n            \"failedAccessAttempts\": 0,\n            \"dateCreationAsString\": \"2018-05-01\",\n            \"dateLastAccessAsString\": \"2018-05-14\",\n            \"ruolo\": {\n                \"id\": 1,\n                \"nome\": \"administrator\"\n            }\n        },\n        \"commenti\": [\n            {\n                \"id\": 1,\n                \"testo\": \"il tofu e' buonissimo!\",\n                \"dataInserimentoAsString\": \"2018-05-01\",\n                \"dataRispostaAsString\": \"2018-04-23\",\n                \"risposta\": \"e' proprio vero!\",\n                \"visibile\": true,\n                \"post\": {\n                    \"id\": 2,\n                    \"titolo\": \"tofu\",\n                    \"descrizione\": \"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>\",\n                    \"dataPostAsString\": \"2018-05-07\",\n                    \"visibile\": true,\n                    \"visite\": 43,\n                    \"categoria\": {\n                        \"id\": 2,\n                        \"nome\": \"cucina\",\n                        \"descrizione\": \"Tutti i piatti piu' prelibati\",\n                        \"immagine\": null\n                    },\n                    \"utente\": {\n                        \"id\": 1,\n                        \"email\": \"admin@admin.com\",\n                        \"password\": null,\n                        \"isActive\": true,\n                        \"isBanned\": false,\n                        \"failedAccessAttempts\": 0,\n                        \"dateCreationAsString\": \"2018-05-01\",\n                        \"dateLastAccessAsString\": \"2018-05-14\",\n                        \"ruolo\": {\n                            \"id\": 1,\n                            \"nome\": \"administrator\"\n                        }\n                    },\n                    \"commenti\": [],\n                    \"tags\": []\n                },\n                \"utente\": {\n                    \"id\": 1,\n                    \"email\": \"admin@admin.com\",\n                    \"password\": null,\n                    \"isActive\": true,\n                    \"isBanned\": false,\n                    \"failedAccessAttempts\": 0,\n                    \"dateCreationAsString\": \"2018-05-01\",\n                    \"dateLastAccessAsString\": \"2018-05-14\",\n                    \"ruolo\": {\n                        \"id\": 1,\n                        \"nome\": \"administrator\"\n                    }\n                }\n            },\n            {\n                \"id\": 3,\n                \"testo\": \"Delizioso Ramen!\",\n                \"dataInserimentoAsString\": \"2018-05-31\",\n                \"dataRispostaAsString\": \"2018-06-01\",\n                \"risposta\": \"e' proprio vero!\",\n                \"visibile\": true,\n                \"post\": {\n                    \"id\": 2,\n                    \"titolo\": \"tofu\",\n                    \"descrizione\": \"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>\",\n                    \"dataPostAsString\": \"2018-05-07\",\n                    \"visibile\": true,\n                    \"visite\": 43,\n                    \"categoria\": {\n                        \"id\": 2,\n                        \"nome\": \"cucina\",\n                        \"descrizione\": \"Tutti i piatti piu' prelibati\",\n                        \"immagine\": null\n                    },\n                    \"utente\": {\n                        \"id\": 1,\n                        \"email\": \"admin@admin.com\",\n                        \"password\": null,\n                        \"isActive\": true,\n                        \"isBanned\": false,\n                        \"failedAccessAttempts\": 0,\n                        \"dateCreationAsString\": \"2018-05-01\",\n                        \"dateLastAccessAsString\": \"2018-05-14\",\n                        \"ruolo\": {\n                            \"id\": 1,\n                            \"nome\": \"administrator\"\n                        }\n                    },\n                    \"commenti\": [],\n                    \"tags\": []\n                },\n                \"utente\": {\n                    \"id\": 1,\n                    \"email\": \"admin@admin.com\",\n                    \"password\": null,\n                    \"isActive\": true,\n                    \"isBanned\": false,\n                    \"failedAccessAttempts\": 0,\n                    \"dateCreationAsString\": \"2018-05-01\",\n                    \"dateLastAccessAsString\": \"2018-05-14\",\n                    \"ruolo\": {\n                        \"id\": 1,\n                        \"nome\": \"administrator\"\n                    }\n                }\n            },\n            {\n                \"id\": 4,\n                \"testo\": \"Deliziose Tagliatelle!\",\n                \"dataInserimentoAsString\": \"2018-05-31\",\n                \"dataRispostaAsString\": null,\n                \"risposta\": null,\n                \"visibile\": true,\n                \"post\": {\n                    \"id\": 2,\n                    \"titolo\": \"tofu\",\n                    \"descrizione\": \"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>\",\n                    \"dataPostAsString\": \"2018-05-07\",\n                    \"visibile\": true,\n                    \"visite\": 43,\n                    \"categoria\": {\n                        \"id\": 2,\n                        \"nome\": \"cucina\",\n                        \"descrizione\": \"Tutti i piatti piu' prelibati\",\n                        \"immagine\": null\n                    },\n                    \"utente\": {\n                        \"id\": 1,\n                        \"email\": \"admin@admin.com\",\n                        \"password\": null,\n                        \"isActive\": true,\n                        \"isBanned\": false,\n                        \"failedAccessAttempts\": 0,\n                        \"dateCreationAsString\": \"2018-05-01\",\n                        \"dateLastAccessAsString\": \"2018-05-14\",\n                        \"ruolo\": {\n                            \"id\": 1,\n                            \"nome\": \"administrator\"\n                        }\n                    },\n                    \"commenti\": [],\n                    \"tags\": []\n                },\n                \"utente\": {\n                    \"id\": 1,\n                    \"email\": \"admin@admin.com\",\n                    \"password\": null,\n                    \"isActive\": true,\n                    \"isBanned\": false,\n                    \"failedAccessAttempts\": 0,\n                    \"dateCreationAsString\": \"2018-05-01\",\n                    \"dateLastAccessAsString\": \"2018-05-14\",\n                    \"ruolo\": {\n                        \"id\": 1,\n                        \"nome\": \"administrator\"\n                    }\n                }\n            }\n        ],\n        \"tags\": [\n            {\n                \"id\": 2,\n                \"nome\": \"vegano\",\n                \"posts\": []\n            },\n            {\n                \"id\": 8,\n                \"nome\": \"leopardo\",\n                \"posts\": []\n            }\n        ]\n    },\n    \"utente\": {\n        \"id\": 1,\n        \"email\": \"admin@admin.com\",\n        \"password\": null,\n        \"isActive\": true,\n        \"failedAccessAttempts\": 0,\n        \"isBanned\": false,\n        \"dateCreation\": \"2018-05-01\",\n        \"dateLastAccess\": \"2018-05-14\",\n        \"ruolo\": {\n            \"id\": 1,\n            \"nome\": \"administrator\"\n        },\n        \"dateLastAccessAsString\": \"2018-05-14\",\n        \"dateCreationAsString\": \"2018-05-01\"\n    }\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "95fbcc5b-7c59-451b-a546-d5fde31e0871",
+			"name": "getTag by name",
+			"url": "http://localhost:8080/blog/rest/tags/names/vegetariano",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
 			"pathVariables": {}
 		},
 		{
@@ -199,7 +323,7 @@
 		{
 			"id": "9edc1d17-517f-4b48-bdbf-98603bb5e850",
 			"name": "getListaPost",
-			"url": "http://localhost:8080/blog/rest/posts",
+			"url": "http://localhost:8080/blog/rest/posts/",
 			"description": "",
 			"data": null,
 			"dataMode": "params",
@@ -217,6 +341,23 @@
 			"id": "a3e5da59-d5a4-4670-9c85-965039ace5b7",
 			"name": "getListaUtenti",
 			"url": "http://localhost:8080/blog/rest/utenti",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "b223eb2e-2bee-4b4a-ac43-34a814e0197f",
+			"name": "getPost",
+			"url": "http://localhost:8080/blog/rest/posts/2",
 			"description": "",
 			"data": null,
 			"dataMode": "params",
@@ -251,6 +392,30 @@
 			"folder": null,
 			"rawModeData": " ",
 			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "cf8505b6-dd78-44f2-b13f-c4445d895b70",
+			"name": "getListaCommenti",
+			"url": "http://localhost:8080/blog/rest/commenti",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "jwt",
+					"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIvbG9naW4iLCJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwic2NvcGUiOiJhZG1pbmlzdHJhdG9yIn0.FKFTfkhsgUhG6S8cuZRLS3f4-W7v8e8Zw7mDlZ6kdnQ",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": null,
+			"headers": "jwt: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIvbG9naW4iLCJuYW1lIjoiYWRtaW5AYWRtaW4uY29tIiwic2NvcGUiOiJhZG1pbmlzdHJhdG9yIn0.FKFTfkhsgUhG6S8cuZRLS3f4-W7v8e8Zw7mDlZ6kdnQ\n",
 			"pathVariables": {}
 		},
 		{
