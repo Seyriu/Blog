@@ -47,11 +47,16 @@ public class CommentoRest {
     @DELETE
     @Consumes("application/json")
     @Produces("application/json")
-    public boolean deleteCommento(@PathParam("id") Long id) {
+    public boolean deleteCommento(@PathParam("id") Long id, @HeaderParam("jwt") String compactJwt) {
         try {
-            CommentoDAO cDAO = new CommentoDAO();
-            cDAO.deleteCommento(id);
-            return true;
+            Authentication auth = new Authentication();
+            if (auth.checkJWSAdmin(compactJwt)) {
+                CommentoDAO cDAO = new CommentoDAO();
+                cDAO.deleteCommento(id);
+                return true;
+            } else {
+                return false;
+            }
         } catch (BlogException ex) {
             System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());
             return false;
@@ -77,7 +82,7 @@ public class CommentoRest {
     @PUT
     @Consumes("application/json")
     @Produces("application/json")
-    public boolean updateVisibility(String visibility, @PathParam("id") long id,  @HeaderParam("jwt") String compactJwt) {
+    public boolean updateVisibility(String visibility, @PathParam("id") long id, @HeaderParam("jwt") String compactJwt) {
         try {
             Authentication auth = new Authentication();
             if (auth.checkJWSAdmin(compactJwt)) {

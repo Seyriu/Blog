@@ -62,7 +62,7 @@ CREATE TABLE `commento` (
   KEY `id_utente` (`id_utente`),
   CONSTRAINT `commento_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `commento_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,8 +94,8 @@ CREATE TABLE `post` (
   PRIMARY KEY (`id`),
   KEY `id_categoria` (`id_categoria`),
   KEY `id_utente` (`id_utente`),
-  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`),
-  CONSTRAINT `post_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`)
+  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `post_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -205,7 +205,7 @@ CREATE TABLE `utente` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `id_ruolo` (`id_ruolo`),
   CONSTRAINT `utente_ibfk_1` FOREIGN KEY (`id_ruolo`) REFERENCES `ruolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +214,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (1,'admin@admin.com','admin',1,0,0,'2018-05-01 09:25:00','2018-05-14 07:08:00',1),(15,'user7@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(16,'user8@user.com','user',0,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3),(17,'user9@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(19,'user10@user.com','user',0,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3),(25,'user2@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(26,'user3@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(28,'user4@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(30,'user6@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',NULL),(32,'user5@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',NULL),(34,'user11@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',NULL),(35,'user12@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',NULL);
+INSERT INTO `utente` VALUES (1,'admin@admin.com','admin',1,0,0,'2018-05-01 09:25:00','2018-05-14 07:08:00',1),(15,'user7@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(16,'user8@user.com','user',0,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3),(17,'user9@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(19,'user10@user.com','user',0,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3),(25,'user2@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(26,'user3@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(28,'user4@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(30,'user6@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(32,'user5@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(34,'user11@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(35,'user12@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(46,'denis.coccodi@gmail.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3),(47,'seyriu@hotmail.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3),(48,'user100@user.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3),(49,'user101@user.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3),(50,'user102@user.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3);
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -227,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-02 21:14:03
+-- Dump completed on 2018-06-05 19:03:40
