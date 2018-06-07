@@ -67,11 +67,16 @@ public class CommentoRest {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public boolean insertCommento(CommentoDTO cDTO) {
+    public boolean insertCommento(CommentoDTO cDTO, @HeaderParam("jwt") String compactJwt) {
         try {
+            Authentication auth = new Authentication();
+            if (auth.checkJWSUtenteOrAdmin(compactJwt)) {
             CommentoDAO cDAO = new CommentoDAO();
             cDAO.insertCommento(cDTO);
             return true;
+            } else {
+                return false;
+            }
         } catch (BlogException ex) {
             System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());
             return false;

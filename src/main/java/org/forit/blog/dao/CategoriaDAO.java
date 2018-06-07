@@ -14,7 +14,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import org.forit.blog.dto.CategoriaDTO;
 import org.forit.blog.entity.CategoriaEntity;
-import org.forit.blog.entity.CommentoEntity;
 import org.forit.blog.exceptions.BlogException;
 
 /**
@@ -68,6 +67,30 @@ public class CategoriaDAO {
 
     return cDTO;
   }
+
+    public void insertCategoria(CategoriaDTO cDTO) throws BlogException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+        EntityManager em = emf.createEntityManager();
+
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+
+            CategoriaEntity cEntity = new CategoriaEntity();
+            cEntity.setNome(cDTO.getNome());
+            cEntity.setDescrizione(cDTO.getDescrizione());
+            cEntity.setImmagine(cDTO.getImmagine());
+
+            em.persist(cEntity);
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            throw new BlogException(ex);
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
 
     public void deleteCategoria(long id) throws BlogException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
