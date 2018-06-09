@@ -22,6 +22,7 @@ import org.forit.blog.dto.RuoloDTO;
 import org.forit.blog.dto.TagDTO;
 import org.forit.blog.dto.UtenteDTO;
 import org.forit.blog.entity.CategoriaEntity;
+import org.forit.blog.entity.CommentoEntity;
 import org.forit.blog.entity.PostEntity;
 import org.forit.blog.entity.RuoloEntity;
 import org.forit.blog.entity.TagEntity;
@@ -239,6 +240,27 @@ public class PostDAO {
         } finally {
             em.close();
             emf.close();
+        }
+    }
+    
+    public void increaseViewCount(long id) throws BlogException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+        EntityManager em = emf.createEntityManager();
+
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            
+            PostEntity pEntity = em.find(PostEntity.class, id);
+            pEntity.setVisite(pEntity.getVisite() + 1);
+            em.merge(pEntity);
+
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            throw new BlogException(ex);
+        } finally {
+            em.close();
         }
     }
 }

@@ -12,10 +12,12 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import org.forit.blog.authentication.Authentication;
+import org.forit.blog.dao.CommentoDAO;
 import org.forit.blog.dao.PostDAO;
 import org.forit.blog.dto.CategoriaDTO;
 import org.forit.blog.dto.PostDTO;
@@ -75,6 +77,26 @@ public class PostRest {
             if (auth.checkJWSAdmin(compactJwt)) {
                 PostDAO pDAO = new PostDAO();
                 pDAO.insertPost(pDTO);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (BlogException ex) {
+            System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());
+            return false;
+        }
+    }
+    
+    @Path("/view-count/{id}")
+    @PUT
+    @Consumes("application/json")
+    @Produces("application/json")
+    public boolean increaseViewCount(String visibility, @PathParam("id") long id, @HeaderParam("jwt") String compactJwt) {
+        try {
+            Authentication auth = new Authentication();
+            if (auth.checkJWSUtenteOrAdmin(compactJwt)) {
+                PostDAO pDAO = new PostDAO();
+                pDAO.increaseViewCount(id);
                 return true;
             } else {
                 return false;

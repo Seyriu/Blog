@@ -83,7 +83,7 @@ public class CommentoRest {
         }
     }
 
-    @Path("/{id}")
+    @Path("/visibility/{id}")
     @PUT
     @Consumes("application/json")
     @Produces("application/json")

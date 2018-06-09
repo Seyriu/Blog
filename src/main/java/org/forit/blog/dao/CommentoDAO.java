@@ -181,6 +181,27 @@ public class CommentoDAO {
             emf.close();
         }
     }
+    
+    public void updateVisibility(String visibility, long id) throws BlogException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+        EntityManager em = emf.createEntityManager();
+
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            
+            CommentoEntity commento = em.find(CommentoEntity.class, id);
+            commento.setVisibile(visibility);
+            em.merge(commento);
+
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            throw new BlogException(ex);
+        } finally {
+            em.close();
+        }
+    }
 
 //    public void updateCommento(CommentoDTO cDTO, long id) throws BlogException {
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
@@ -213,25 +234,4 @@ public class CommentoDAO {
 //            emf.close();
 //        }
 //    }
-    
-    public void updateVisibility(String visibility, long id) throws BlogException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
-        EntityManager em = emf.createEntityManager();
-
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            
-            CommentoEntity commento = em.find(CommentoEntity.class, id);
-            commento.setVisibile(visibility);
-            em.merge(commento);
-
-            transaction.commit();
-        } catch (Exception ex) {
-            transaction.rollback();
-            throw new BlogException(ex);
-        } finally {
-            em.close();
-        }
-    }
 }
