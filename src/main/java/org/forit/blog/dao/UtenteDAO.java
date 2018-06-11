@@ -99,7 +99,7 @@ public class UtenteDAO {
         return uDTO;
     }
 
-    public UtenteEntity loadUtenteByEmail(String email) {
+    private UtenteEntity loadUtenteByEmail(String email) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
         EntityManager em = emf.createEntityManager();
         TypedQuery<UtenteEntity> query = em.createNamedQuery("utente.selectUserByEmail", UtenteEntity.class)
@@ -109,6 +109,21 @@ public class UtenteDAO {
         emf.close();
 
         return uEntity;
+    }
+
+    public UtenteDTO loadUtenteDTOByEmail(String email) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<UtenteEntity> query = em.createNamedQuery("utente.selectUserByEmail", UtenteEntity.class)
+                .setParameter("email", email);
+        UtenteEntity uEntity = query.getResultList().get(0);
+        em.close();
+        emf.close();
+
+        if (uEntity != null) {
+            return this.UtenteEntityToUtenteDTO(uEntity);
+        }
+        return null; 
     }
 
     public void insertUtente(UtenteDTO uDTO) throws BlogException {
