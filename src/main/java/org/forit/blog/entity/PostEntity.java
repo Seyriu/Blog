@@ -6,12 +6,10 @@
 package org.forit.blog.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import static javassist.bytecode.InnerClassesAttribute.tag;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,7 +49,7 @@ public class PostEntity implements Serializable {
     private String descrizione;
 
     @Column(name = "DATA", unique = true, nullable = false)
-    private LocalDate dataPost;
+    private LocalDateTime dataPost;
 
     @Column(name = "VISIBILE", unique = true, nullable = false)
     private Boolean visibile;
@@ -81,7 +79,7 @@ public class PostEntity implements Serializable {
     public PostEntity() {
     }
 
-    public PostEntity(long id, String titolo, String descrizione, LocalDate dataPost, Boolean visibile, Integer visite, CategoriaEntity categoria, UtenteEntity utente) {
+    public PostEntity(long id, String titolo, String descrizione, LocalDateTime dataPost, Boolean visibile, Integer visite, CategoriaEntity categoria, UtenteEntity utente) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
@@ -132,11 +130,11 @@ public class PostEntity implements Serializable {
         this.descrizione = descrizione;
     }
 
-    public LocalDate getDataPost() {
+    public LocalDateTime getDataPost() {
         return dataPost;
     }
 
-    public void setDataPost(LocalDate dataPost) {
+    public void setDataPost(LocalDateTime dataPost) {
         this.dataPost = dataPost;
     }
 

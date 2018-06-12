@@ -7,10 +7,10 @@ package org.forit.blog.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
-import org.forit.blog.serializer.LocalDateDeserializer;
-import org.forit.blog.serializer.LocalDateSerializer;
+import org.forit.blog.serializer.LocalDateTimeDeserializer;
+import org.forit.blog.serializer.LocalDateTimeSerializer;
 
 /**
  *
@@ -25,19 +25,19 @@ public class UtenteDTO {
   private int failedAccessAttempts;
   private Boolean isBanned;
 
-  @JsonDeserialize(using = LocalDateDeserializer.class)
-  @JsonSerialize(using = LocalDateSerializer.class)
-  private LocalDate dateCreation;
+  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+  @JsonSerialize(using = LocalDateTimeSerializer.class)
+  private LocalDateTime dateCreation;
 
-  @JsonDeserialize(using = LocalDateDeserializer.class)
-  @JsonSerialize(using = LocalDateSerializer.class)
-  private LocalDate dateLastAccess;
+  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+  @JsonSerialize(using = LocalDateTimeSerializer.class)
+  private LocalDateTime dateLastAccess;
   private RuoloDTO ruolo;
 
   public UtenteDTO() {
   }
 
-  public UtenteDTO(long id, String email, Boolean isActive, int failedAccessAttempts, Boolean isBanned, LocalDate dateCreation, LocalDate dateLastAccess, RuoloDTO ruolo) {
+  public UtenteDTO(long id, String email, Boolean isActive, int failedAccessAttempts, Boolean isBanned, LocalDateTime dateCreation, LocalDateTime dateLastAccess, RuoloDTO ruolo) {
     this.id = id;
     this.email = email;
     this.isActive = isActive;
@@ -96,11 +96,11 @@ public class UtenteDTO {
     this.isBanned = isBanned;
   }
 
-  public LocalDate getDateCreation() {
+  public LocalDateTime getDateCreation() {
     return dateCreation;
   }
 
-  public void setDateCreation(LocalDate dateCreation) {
+  public void setDateCreation(LocalDateTime dateCreation) {
     this.dateCreation = dateCreation;
   }
 
@@ -109,14 +109,14 @@ public class UtenteDTO {
   }
 
   public void setDateCreationAsString(String creationDate) {
-    this.dateCreation = LocalDate.parse(creationDate);
+    this.dateCreation = LocalDateTime.parse(creationDate);
   }
 
-  public LocalDate getDateLastAccess() {
+  public LocalDateTime getDateLastAccess() {
     return dateLastAccess;
   }
 
-  public void setDateLastAccess(LocalDate dateLastAccess) {
+  public void setDateLastAccess(LocalDateTime dateLastAccess) {
     this.dateLastAccess = dateLastAccess;
   }
 
@@ -125,7 +125,7 @@ public class UtenteDTO {
   }
 
   public void setDateLastAccessAsString(String lastAccess) {
-    this.dateLastAccess = LocalDate.parse(lastAccess);
+    this.dateLastAccess = LocalDateTime.parse(lastAccess);
   }
 
   public RuoloDTO getRuolo() {

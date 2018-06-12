@@ -10,22 +10,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author UTENTE
  */
-public class LocalDateDeserializer extends StdDeserializer<LocalDate> {
+public class LocalDateTimeDeserializer extends StdDeserializer<LocalDateTime> {
 
-    protected LocalDateDeserializer() {
-        super(LocalDate.class);
+    protected LocalDateTimeDeserializer() {
+        super(LocalDateTime.class);
     }
 
     @Override
-    public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public LocalDateTime deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         try {
-            return LocalDate.parse(jp.readValueAs(String.class));
+            return LocalDateTime.parse(jp.readValueAs(String.class));
         } catch (Exception ex) {
             System.out.println("Error during deserialization: " + ex);
         }

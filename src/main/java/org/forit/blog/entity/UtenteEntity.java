@@ -6,7 +6,7 @@
 package org.forit.blog.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,10 +54,10 @@ public class UtenteEntity implements Serializable{
   private Boolean isBanned;
 
   @Column(name = "date_creation", unique = false, nullable = false)
-  private LocalDate dateCreation;
+  private LocalDateTime dateCreation;
 
   @Column(name = "date_last_access", unique = false, nullable = true)
-  private LocalDate dateLastAccess;
+  private LocalDateTime dateLastAccess;
   
   @OneToOne
   @JoinColumn(name="id_ruolo")
@@ -66,7 +66,7 @@ public class UtenteEntity implements Serializable{
   public UtenteEntity() {
   }
 
-  public UtenteEntity(long id, String email, String password, Boolean isActive, Integer failed_access_attempts, Boolean isBanned, LocalDate dateCreation, LocalDate dateLastAccess, RuoloEntity ruolo) {
+  public UtenteEntity(long id, String email, String password, Boolean isActive, Integer failed_access_attempts, Boolean isBanned, LocalDateTime dateCreation, LocalDateTime dateLastAccess, RuoloEntity ruolo) {
     this.id = id;
     this.email = email;
     this.password = password;
@@ -126,19 +126,19 @@ public class UtenteEntity implements Serializable{
     this.isBanned = isBanned;
   }
 
-  public LocalDate getDateCreation() {
+  public LocalDateTime getDateCreation() {
     return dateCreation;
   }
 
-  public void setDateCreation(LocalDate dateCreation) {
+  public void setDateCreation(LocalDateTime dateCreation) {
     this.dateCreation = dateCreation;
   }
 
-  public LocalDate getDateLastAccess() {
+  public LocalDateTime getDateLastAccess() {
     return dateLastAccess;
   }
 
-  public void setDateLastAccess(LocalDate dateLastAccess) {
+  public void setDateLastAccess(LocalDateTime dateLastAccess) {
     this.dateLastAccess = dateLastAccess;
   }
 

@@ -10,25 +10,25 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author UTENTE
  */
-public class LocalDateSerializer extends StdSerializer<LocalDate> {
+public class LocalDateTimeSerializer extends StdSerializer<LocalDateTime> {
 
     private static final long serialVersionUID = 1L;
 
-    public LocalDateSerializer() {
-        super(LocalDate.class);
+    public LocalDateTimeSerializer() {
+        super(LocalDateTime.class);
     }
 
     @Override
-    public void serialize(LocalDate value, JsonGenerator gen, SerializerProvider sp) throws IOException, JsonProcessingException {
+    public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider sp) throws IOException, JsonProcessingException {
         if (value != null) {
-            gen.writeString(value.format(DateTimeFormatter.ISO_LOCAL_DATE));
+            gen.writeString(value.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)); // ofPattern("yyyy-MM-ddTHH:mm:ss")
         }
     }
 }

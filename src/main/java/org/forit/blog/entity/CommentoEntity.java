@@ -6,7 +6,7 @@
 package org.forit.blog.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,13 +40,13 @@ public class CommentoEntity implements Serializable {
   private String testo;
 
   @Column(name = "DATA_INSERIMENTO", unique = false, nullable = false)
-  private LocalDate dataInserimento;
+  private LocalDateTime dataInserimento;
 
   @Column(name = "RISPOSTA", unique = false, nullable = true)
   private String risposta;
 
   @Column(name = "DATA_RISPOSTA", unique = false, nullable = true)
-  private LocalDate dataRisposta;
+  private LocalDateTime dataRisposta;
 
   @Column(name = "VISIBILE", unique = false, nullable = false)
   private String visibile;
@@ -62,7 +62,7 @@ public class CommentoEntity implements Serializable {
   public CommentoEntity() {
   }
 
-  public CommentoEntity(long id, String testo, LocalDate dataInserimento, String risposta, LocalDate dataRisposta, String visibile, PostEntity post, UtenteEntity utente) {
+  public CommentoEntity(long id, String testo, LocalDateTime dataInserimento, String risposta, LocalDateTime dataRisposta, String visibile, PostEntity post, UtenteEntity utente) {
     this.id = id;
     this.testo = testo;
     this.dataInserimento = dataInserimento;
@@ -89,11 +89,11 @@ public class CommentoEntity implements Serializable {
     this.testo = testo;
   }
 
-  public LocalDate getDataInserimento() {
+  public LocalDateTime getDataInserimento() {
     return dataInserimento;
   }
 
-  public void setDataInserimento(LocalDate dataInserimento) {
+  public void setDataInserimento(LocalDateTime dataInserimento) {
     this.dataInserimento = dataInserimento;
   }
 
@@ -105,11 +105,11 @@ public class CommentoEntity implements Serializable {
     this.risposta = risposta;
   }
 
-  public LocalDate getDataRisposta() {
+  public LocalDateTime getDataRisposta() {
     return dataRisposta;
   }
 
-  public void setDataRisposta(LocalDate dataRisposta) {
+  public void setDataRisposta(LocalDateTime dataRisposta) {
     this.dataRisposta = dataRisposta;
   }
 

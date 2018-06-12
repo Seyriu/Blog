@@ -7,10 +7,10 @@ package org.forit.blog.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
-import org.forit.blog.serializer.LocalDateDeserializer;
-import org.forit.blog.serializer.LocalDateSerializer;
+import org.forit.blog.serializer.LocalDateTimeDeserializer;
+import org.forit.blog.serializer.LocalDateTimeSerializer;
 
 /**
  *
@@ -21,14 +21,14 @@ public class CommentoDTO {
     private long id;
     private String testo;
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate dataInserimento;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime dataInserimento;
     private String risposta;
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate dataRisposta;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime dataRisposta;
     private String visibile;
     private PostDTO post;
     private UtenteDTO utente;
@@ -36,7 +36,7 @@ public class CommentoDTO {
     public CommentoDTO() {
     }
 
-    public CommentoDTO(long id, String testo, LocalDate dataInserimento, String visibile, PostDTO post, UtenteDTO utente) {
+    public CommentoDTO(long id, String testo, LocalDateTime dataInserimento, String visibile, PostDTO post, UtenteDTO utente) {
         this.id = id;
         this.testo = testo;
         this.dataInserimento = dataInserimento;
@@ -61,11 +61,11 @@ public class CommentoDTO {
         this.testo = testo;
     }
 
-    public LocalDate getDataInserimento() {
+    public LocalDateTime getDataInserimento() {
         return dataInserimento;
     }
 
-    public void setDataInserimento(LocalDate dataInserimento) {
+    public void setDataInserimento(LocalDateTime dataInserimento) {
         this.dataInserimento = dataInserimento;
     }
 
@@ -74,7 +74,7 @@ public class CommentoDTO {
     }
 
     public void setDataInserimentoAsString(String lastAccess) {
-        this.dataInserimento = LocalDate.parse(lastAccess);
+        this.dataInserimento = LocalDateTime.parse(lastAccess);
     }
 
     public String getRisposta() {
@@ -85,11 +85,11 @@ public class CommentoDTO {
         this.risposta = risposta;
     }
 
-    public LocalDate getDataRisposta() {
+    public LocalDateTime getDataRisposta() {
         return dataRisposta;
     }
 
-    public void setDataRisposta(LocalDate dataRisposta) {
+    public void setDataRisposta(LocalDateTime dataRisposta) {
         this.dataRisposta = dataRisposta;
     }
 
@@ -102,7 +102,7 @@ public class CommentoDTO {
 
     public void setDataRispostaAsString(String lastAccess) {
         if (lastAccess != null && !lastAccess.equals("")) {
-            this.dataRisposta = LocalDate.parse(lastAccess);
+            this.dataRisposta = LocalDateTime.parse(lastAccess);
         }
     }
 

@@ -7,11 +7,11 @@ package org.forit.blog.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import org.forit.blog.serializer.LocalDateDeserializer;
-import org.forit.blog.serializer.LocalDateSerializer;
+import org.forit.blog.serializer.LocalDateTimeDeserializer;
+import org.forit.blog.serializer.LocalDateTimeSerializer;
 
 /**
  *
@@ -23,9 +23,9 @@ public class PostDTO {
     private String titolo;
     private String descrizione;
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate dataPost;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime dataPost;
     private Boolean visibile;
     private int visite;
     private CategoriaDTO categoria;
@@ -36,7 +36,7 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(long id, String titolo, String descrizione, LocalDate dataPost, Boolean visibile, int visite, CategoriaDTO categoria, UtenteDTO utente) {
+    public PostDTO(long id, String titolo, String descrizione, LocalDateTime dataPost, Boolean visibile, int visite, CategoriaDTO categoria, UtenteDTO utente) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
@@ -71,11 +71,11 @@ public class PostDTO {
         this.descrizione = descrizione;
     }
 
-    public LocalDate getDataPost() {
+    public LocalDateTime getDataPost() {
         return dataPost;
     }
 
-    public void setDataPost(LocalDate dataPost) {
+    public void setDataPost(LocalDateTime dataPost) {
         this.dataPost = dataPost;
     }
 
@@ -84,7 +84,7 @@ public class PostDTO {
     }
 
     public void setDataPostAsString(String lastAccess) {
-        this.dataPost = LocalDate.parse(lastAccess);
+        this.dataPost = LocalDateTime.parse(lastAccess);
     }
 
     public Boolean getVisibile() {
