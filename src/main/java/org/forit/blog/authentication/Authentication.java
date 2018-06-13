@@ -25,6 +25,7 @@ import org.forit.blog.exceptions.BlogException;
 public class Authentication {
 
     private Key keyProperty;
+    private String encriptionKey = "EncryptionKeyDenis";
 
     public String getJWS(String subjectUrl, String email, String authScope) throws BlogException {
         try {
@@ -35,7 +36,7 @@ public class Authentication {
                     .claim("scope", authScope)
                     .signWith(
                             SignatureAlgorithm.HS256,
-                            "EncryptionKeyDenis".getBytes("UTF-8")
+                            encriptionKey.getBytes("UTF-8")
                     )
                     .compact();
         } catch (UnsupportedEncodingException ex) {
@@ -46,7 +47,7 @@ public class Authentication {
     public boolean checkJWSAdmin(String compactJws) throws BlogException {
         try {
             Jws<Claims> claims = Jwts.parser()
-                    .setSigningKey("EncryptionKeyDenis".getBytes("UTF-8"))
+                    .setSigningKey(encriptionKey.getBytes("UTF-8"))
                     .parseClaimsJws(compactJws);
             String scope = (String) claims.getBody().get("scope");
             String email = (String) claims.getBody().get("name");
@@ -68,7 +69,7 @@ public class Authentication {
     public boolean checkJWSUtenteOrAdmin(String compactJws) throws BlogException {
         try {
             Jws<Claims> claims = Jwts.parser()
-                    .setSigningKey("EncryptionKeyDenis".getBytes("UTF-8"))
+                    .setSigningKey(encriptionKey.getBytes("UTF-8"))
                     .parseClaimsJws(compactJws);
             String scope = (String) claims.getBody().get("scope");
             String email = (String) claims.getBody().get("name");
@@ -88,4 +89,16 @@ public class Authentication {
         }
     }
 
+    public String getEmailFromJWS(String compactJws) throws BlogException {
+        try {
+            Jws<Claims> claims = Jwts.parser()
+                    .setSigningKey(encriptionKey.getBytes("UTF-8"))
+                    .parseClaimsJws(compactJws);
+            return (String) claims.getBody().get("name");
+
+        } catch (ExpiredJwtException | MalformedJwtException | io.jsonwebtoken.SignatureException | UnsupportedJwtException | IllegalArgumentException | UnsupportedEncodingException ex) {
+            throw new BlogException(ex);
+        }
+    }
+    
 }
