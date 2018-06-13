@@ -18,7 +18,8 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
  * @author Casper
  */
 public class ImageUploadDAO {
-
+private static final long MAX_FILE_SIZE = 800;
+    
     public Response imageUpload(InputStream uploadedInputStream,
             FormDataContentDisposition fileDetail, final String SERVER_PATH) {
         if (uploadedInputStream == null || fileDetail == null) {
@@ -34,7 +35,11 @@ public class ImageUploadDAO {
         }
         String uploadedFileLocation = SERVER_PATH + fileDetail.getFileName();
         try {
-            saveToFile(uploadedInputStream, uploadedFileLocation);
+            if (isTooLarge(uploadedInputStream, MAX_FILE_SIZE)) {
+                saveToFile(uploadedInputStream, uploadedFileLocation);
+            } else {
+                return Response.status(500).entity("File is too big").build();
+            }
         } catch (IOException e) {
             return Response.status(500).entity("Can not save file").build();
         }
@@ -59,6 +64,18 @@ public class ImageUploadDAO {
         }
         out.flush();
         out.close();
+    }
+
+    private boolean isTooLarge(InputStream in, long max) throws IOException {
+        long i = 0;
+        byte[] bytes = new byte[1024];
+        while ((in.read(bytes)) != -1) {
+            i++;
+            if (i > max) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

@@ -17,6 +17,7 @@ import javax.ws.rs.core.UriInfo;
 import org.forit.blog.authentication.Authentication;
 import org.forit.blog.dao.ImageUploadDAO;
 import org.forit.blog.exceptions.BlogException;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
@@ -37,6 +38,7 @@ public class ImageUploadRest {
      *
      * @param uploadedInputStream
      * @param fileDetail
+     * @param body
      * @param compactJwt
      * @return error response in case of missing parameters an internal
      * exception or success response if file has been stored successfully
@@ -47,14 +49,20 @@ public class ImageUploadRest {
     public Response uploadFile(
             @FormDataParam("profilePicture") InputStream uploadedInputStream,
             @FormDataParam("profilePicture") FormDataContentDisposition fileDetail,
+            @FormDataParam("profilePicture") final FormDataBodyPart body,
             @HeaderParam("jwt") String compactJwt) {
         try {
             Authentication auth = new Authentication();
             if (auth.checkJWSAdmin(compactJwt)) {
                 String email = auth.getEmailFromJWS(compactJwt);
-                ImageUploadDAO iuDAO = new ImageUploadDAO();
-                String serverPath = UPLOAD_FOLDER + email + "\\profilepicture\\";
-                return iuDAO.imageUpload(uploadedInputStream, fileDetail, serverPath);
+                if (body.getMediaType().toString().equals("image/jpeg")
+                        || body.getMediaType().toString().equals("image/png")) {
+                    ImageUploadDAO iuDAO = new ImageUploadDAO();
+                    String serverPath = UPLOAD_FOLDER + email + "\\profilepicture\\";
+                    return iuDAO.imageUpload(uploadedInputStream, fileDetail, serverPath);
+                } else {
+                    return Response.status(500).entity("Not an acceptable file format!").build();
+                }
             }
             return null;
         } catch (BlogException ex) {
