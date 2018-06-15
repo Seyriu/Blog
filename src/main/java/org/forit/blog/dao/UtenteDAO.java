@@ -42,6 +42,7 @@ public class UtenteDAO {
                 uEntity.getIsActive(),
                 uEntity.getFailed_access_attempts(),
                 uEntity.getIsBanned(),
+                uEntity.getImage(),
                 uEntity.getDateCreation(),
                 uEntity.getDateLastAccess(),
                 rDTO);
@@ -66,6 +67,7 @@ public class UtenteDAO {
                 uDTO.getIsActive(),
                 uDTO.getFailedAccessAttempts(),
                 uDTO.getIsBanned(),
+                uDTO.getImage(),
                 uDTO.getDateCreation(),
                 uDTO.getDateLastAccess(),
                 rEntity);
@@ -193,6 +195,27 @@ public class UtenteDAO {
 
             UtenteEntity utente = em.find(UtenteEntity.class, id);
             utente.setIsBanned(isBanned);
+            em.merge(utente);
+
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            throw new BlogException(ex);
+        } finally {
+            em.close();
+        }
+    }
+
+    public void updateImage(String imagePath, String email) throws BlogException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+        EntityManager em = emf.createEntityManager();
+
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+
+            UtenteEntity utente = loadUtenteByEmail(email);
+            utente.setImage(imagePath);
             em.merge(utente);
 
             transaction.commit();

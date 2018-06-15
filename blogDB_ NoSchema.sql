@@ -28,7 +28,7 @@ CREATE TABLE `categoria` (
   `descrizione` text,
   `immagine` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'sport','tutti gli sport del mondo',NULL),(2,'cucina','Tutti i piatti piu\' prelibati',NULL),(3,'flora e fauna','piante e animali dal mondo',NULL),(4,'moda','tutti alla moda',NULL);
+INSERT INTO `categoria` VALUES (1,'sport','tutti gli sport del mondo',NULL),(2,'cucina','Tutti i piatti piu\' prelibati',NULL),(3,'flora e fauna','piante e animali dal mondo',NULL),(4,'moda','tutti alla moda',NULL),(5,'Skateboarding','',NULL),(6,'Ammaccabanane','Scrubs',NULL),(8,'Libri','Libri di ogni genere',NULL),(9,'Rose','Ma senza le spine!',NULL);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `commento` (
   KEY `id_utente` (`id_utente`),
   CONSTRAINT `commento_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `commento_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `commento` (
 
 LOCK TABLES `commento` WRITE;
 /*!40000 ALTER TABLE `commento` DISABLE KEYS */;
-INSERT INTO `commento` VALUES (1,1,'2018-05-01 09:00:00','il tofu e\' buonissimo!','2018-04-23 12:00:00','e\' proprio vero!','true',2),(2,1,'2018-05-02 05:00:23','Questo e\' un corommento al mentolo!',NULL,NULL,'true',3),(3,1,'2018-05-31 00:00:00','Delizioso Ramen!','2018-06-01 00:00:00','e\' proprio vero!','true',2),(4,1,'2018-05-31 00:00:00','Deliziose Tagliatelle!',NULL,NULL,'true',2),(5,1,'2018-06-02 00:00:00','testo di prova',NULL,NULL,'unchecked',2),(6,1,'2018-06-02 00:00:00','evviva il Tofu!',NULL,NULL,'unchecked',2);
+INSERT INTO `commento` VALUES (1,1,'2018-05-01 09:00:00','il tofu e\' buonissimo!','2018-04-23 12:00:00','e\' proprio vero!','true',2),(2,1,'2018-05-02 05:00:23','Questo e\' un corommento al mentolo!',NULL,NULL,'true',3),(3,1,'2018-05-31 00:00:00','Delizioso Ramen!','2018-06-01 00:00:00','e\' proprio vero!','true',2),(4,1,'2018-05-31 00:00:00','Deliziose Tagliatelle!',NULL,NULL,'true',2),(5,1,'2018-06-02 00:00:00','testo di prova',NULL,NULL,'unchecked',2),(6,1,'2018-06-02 00:00:00','evviva il Tofu!',NULL,NULL,'unchecked',2),(10,46,'2018-06-07 00:00:00','Questo e\' un commento al lampone!',NULL,NULL,'true',2);
 /*!40000 ALTER TABLE `commento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +96,7 @@ CREATE TABLE `post` (
   KEY `id_utente` (`id_utente`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `post_ibfk_2` FOREIGN KEY (`id_utente`) REFERENCES `utente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +105,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,1,1,'Lo scudetto va al Fidelis Andria','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2017-05-07 00:00:00',0,125),(2,2,1,'tofu','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2018-05-07 11:15:19',1,43),(3,3,1,'Le gerbere fioriscono','bellissime le gerbere fiorite','2018-05-07 10:29:37',1,0),(4,4,1,'I risvoltini','Risvoltini per tutti i gusti. Peggio degli involtini','2018-05-04 17:12:00',1,72),(5,1,1,'ciambella','Ciambelle giganti!','2018-05-20 00:00:00',1,125),(6,4,1,'titolo','post','2018-05-27 00:00:00',1,0),(13,1,1,'calcio','A sorpresa, l\'Italia vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(14,1,1,'calcio','Francia vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(16,1,1,'calcio','Spagna vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(17,1,1,'calcio','Germania vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(18,1,1,'calcio','Repubblica Ceca vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(19,3,1,'Gerani','#gerani bellissimi gerani#inFiore#colorati #verdi e#blu','2018-05-30 00:00:00',1,0),(20,4,1,'hubs','#giacche stupende#giacche di tutti i #tipi e ancora #tipi','2018-05-30 00:00:00',1,0),(21,3,1,'I Pioppi','i #pioppi sono bellissimi in questa stagione dell\'#anno !','2018-06-02 00:00:00',1,0);
+INSERT INTO `post` VALUES (1,1,1,'Lo scudetto va al Fidelis Andria','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2017-05-07 00:00:00',0,125),(2,2,1,'tofu','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pellentesque libero eu dictum posuere. Suspendisse dignissim est quis velit porttitor interdum. In non laoreet arcu, id maximus dui. Fusce est neque, posuere et arcu eu, aliquam accumsan augue. Morbi congue justo magna, ut malesuada arcu pretium ut. Suspendisse sed porttitor est. Sed ut orci semper, rutrum augue ut, auctor purus. Pellentesque erat mauris, malesuada at sodales blandit, sodales eget mi. Nunc eu risus at urna mattis aliquam. Ut viverra, massa non vehicula tincidunt, nisl purus egestas ex, eu ornare nisi lectus in quam. Fusce elementum et neque eu consequat. Aenean et justo ante. Pellentesque porttitor convallis nisi, id dictum ex consectetur id. Vestibulum eu semper ipsum, vitae porta augue.</p>','2018-05-07 10:06:00',1,60),(3,3,1,'Le gerbere fioriscono','bellissime le gerbere fiorite','2018-05-07 06:10:00',1,4),(4,4,1,'I risvoltini','Risvoltini per tutti i gusti. Peggio degli involtini','2018-05-04 00:00:00',1,73),(5,1,1,'ciambella','Ciambelle giganti!','2018-05-20 00:00:00',1,125),(6,4,1,'titolo','post','2018-05-27 00:00:00',1,0),(13,1,1,'calcio','A sorpresa, l\'Italia vince i mondiali 2018!','2018-05-20 00:00:00',1,126),(14,1,1,'calcio','Francia vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(16,1,1,'calcio','Spagna vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(17,1,1,'calcio','Germania vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(18,1,1,'calcio','Repubblica Ceca vince i mondiali 2018!','2018-05-20 00:00:00',1,125),(19,3,1,'Gerani','#gerani bellissimi gerani#inFiore#colorati #verdi e#blu','2018-05-30 00:00:00',1,0),(20,4,1,'hubs','#giacche stupende#giacche di tutti i #tipi e ancora #tipi','2018-05-30 00:00:00',1,0),(21,3,1,'I Pioppi','i #pioppi sono bellissimi in questa stagione dell\'#anno !','2018-06-02 00:00:00',1,0),(22,5,1,'Rodney Mullen','Best freestyle skater of all times!','2018-06-07 00:00:00',1,0),(23,1,1,'Italiano batte Djokovich','Incredibile impresa del campione nostrano!','2018-06-08 00:00:00',1,0),(24,1,1,'calcio','calcio e #calcio tag per  il #calcio','2018-06-08 00:00:00',1,0),(25,1,1,'calcio 2 la vendemmia','calcio e #calcio tag per  il #calcio','2018-06-08 00:00:00',1,0),(26,1,1,'calcio 3','calcio e #calcio tag per  il #calcio','2018-06-08 00:00:00',1,0),(27,1,1,'calcio 4 ebbasta!','calcio e #calcio tag per  il #calcio','2018-06-08 00:00:00',1,0),(28,8,1,'manuale Java','manuale di base per java','2018-06-12 21:42:00',1,3);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +132,7 @@ CREATE TABLE `post_tag` (
 
 LOCK TABLES `post_tag` WRITE;
 /*!40000 ALTER TABLE `post_tag` DISABLE KEYS */;
-INSERT INTO `post_tag` VALUES (2,2),(2,8),(3,1),(3,2),(4,4),(4,6),(13,4),(14,4),(17,19),(18,19),(19,20),(19,21),(19,22),(19,23),(19,24),(20,25),(20,26),(21,27),(21,28);
+INSERT INTO `post_tag` VALUES (2,2),(2,8),(3,1),(3,2),(4,4),(4,6),(13,4),(14,4),(17,19),(18,19),(19,20),(19,21),(19,22),(19,23),(19,24),(20,25),(20,26),(21,27),(21,28),(24,4),(25,4),(26,4),(27,4);
 /*!40000 ALTER TABLE `post_tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,11 +201,12 @@ CREATE TABLE `utente` (
   `date_creation` datetime NOT NULL,
   `date_last_access` datetime DEFAULT NULL,
   `id_ruolo` bigint(20) DEFAULT NULL,
+  `image` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `id_ruolo` (`id_ruolo`),
   CONSTRAINT `utente_ibfk_1` FOREIGN KEY (`id_ruolo`) REFERENCES `ruolo` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,7 +215,7 @@ CREATE TABLE `utente` (
 
 LOCK TABLES `utente` WRITE;
 /*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` VALUES (1,'admin@admin.com','admin',1,0,0,'2018-05-01 09:25:00','2018-05-14 07:08:00',1),(15,'user7@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(16,'user8@user.com','user',0,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3),(17,'user9@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(19,'user10@user.com','user',0,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3),(25,'user2@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(26,'user3@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(28,'user4@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(30,'user6@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(32,'user5@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(34,'user11@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(35,'user12@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3),(46,'denis.coccodi@gmail.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3),(47,'seyriu@hotmail.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3),(48,'user100@user.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3),(49,'user101@user.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3),(50,'user102@user.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3);
+INSERT INTO `utente` VALUES (1,'admin@admin.com','admin',1,0,0,'2018-05-01 09:25:00','2018-05-14 07:08:00',1,'/blog/profile-pictures/1_images.png'),(15,'user7@user.com','user',1,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3,NULL),(16,'user8@user.com','user',1,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3,NULL),(17,'user9@user.com','user',1,0,1,'2018-05-27 00:00:00','2018-05-27 00:00:00',3,NULL),(19,'user10@user.com','user',1,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3,NULL),(25,'user2@user.com','user',1,0,1,'2018-05-27 00:00:00','2018-05-27 00:00:00',3,NULL),(26,'user3@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3,NULL),(28,'user4@user.com','user',1,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3,NULL),(30,'user6@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3,NULL),(32,'user5@user.com','user',1,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3,NULL),(34,'user11@user.com','user',0,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3,NULL),(35,'user12@user.com','user',1,0,0,'2018-05-27 00:00:00','2018-05-27 00:00:00',3,NULL),(46,'denis.coccodi@gmail.com','user',1,3,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3,NULL),(47,'seyriu@hotmail.com','user',1,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3,NULL),(48,'user100@user.com','user',1,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3,NULL),(49,'user101@user.com','user',1,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3,NULL),(50,'user102@user.com','user',0,0,0,'2018-06-04 00:00:00','2018-06-04 00:00:00',3,NULL),(51,'userNoFacesConverter@user.com','user',0,0,0,'2018-05-18 00:00:00','2018-05-18 00:00:00',3,NULL),(52,'userDateTime@user.com','user',0,0,0,'2018-05-18 11:20:00','2018-05-18 06:02:25',3,NULL);
 /*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -227,4 +228,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-05 19:03:40
+-- Dump completed on 2018-06-15 13:17:43

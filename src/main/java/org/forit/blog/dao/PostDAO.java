@@ -22,7 +22,6 @@ import org.forit.blog.dto.RuoloDTO;
 import org.forit.blog.dto.TagDTO;
 import org.forit.blog.dto.UtenteDTO;
 import org.forit.blog.entity.CategoriaEntity;
-import org.forit.blog.entity.CommentoEntity;
 import org.forit.blog.entity.PostEntity;
 import org.forit.blog.entity.RuoloEntity;
 import org.forit.blog.entity.TagEntity;
@@ -65,6 +64,7 @@ public class PostDAO {
                     pEntity.getUtente().getIsActive(),
                     pEntity.getUtente().getFailed_access_attempts(),
                     pEntity.getUtente().getIsBanned(),
+                    pEntity.getUtente().getImage(),
                     pEntity.getUtente().getDateCreation(),
                     pEntity.getUtente().getDateLastAccess(),
                     rDTO);
@@ -111,6 +111,7 @@ public class PostDAO {
                     pDTO.getUtente().getIsActive(),
                     pDTO.getUtente().getFailedAccessAttempts(),
                     pDTO.getUtente().getIsBanned(),
+                    pDTO.getUtente().getImage(),
                     pDTO.getUtente().getDateCreation(),
                     pDTO.getUtente().getDateLastAccess(),
                     rEntity);
@@ -242,7 +243,7 @@ public class PostDAO {
             emf.close();
         }
     }
-    
+
     public void increaseViewCount(long id) throws BlogException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
         EntityManager em = emf.createEntityManager();
@@ -250,7 +251,7 @@ public class PostDAO {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            
+
             PostEntity pEntity = em.find(PostEntity.class, id);
             pEntity.setVisite(pEntity.getVisite() + 1);
             em.merge(pEntity);
