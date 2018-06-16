@@ -29,23 +29,23 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 @Path("/upload")
 public class ImageUploadRest {
 
-    @Context
-    private UriInfo context;
-    
-    @Path("/profile-image")
-    @GET
-    public Response uploadFile(@HeaderParam("jwt") String compactJwt){
-        try {
-            Authentication auth = new Authentication();
-            if (auth.checkJWSAdmin(compactJwt)) {
-                String email = auth.getEmailFromJWS(compactJwt);
-            }
-            return null;
-        } catch (BlogException ex) {
-            return null;
-        }
-        
-    }
+//    @Context
+//    private UriInfo context;
+//    
+//    @Path("/profile-image")
+//    @GET
+//    public Response uploadFile(@HeaderParam("jwt") String compactJwt){
+//        try {
+//            Authentication auth = new Authentication();
+//            if (auth.checkJWSAdmin(compactJwt)) {
+//                String email = auth.getEmailFromJWS(compactJwt);
+//            }
+//            return null;
+//        } catch (BlogException ex) {
+//            return null;
+//        }
+//        
+//    }
 
     /**
      * Returns text response to caller containing uploaded file location
@@ -68,7 +68,7 @@ public class ImageUploadRest {
             @HeaderParam("jwt") String compactJwt) {
         try {
             Authentication auth = new Authentication();
-            if (auth.checkJWSAdmin(compactJwt)) {
+            if (auth.checkJWSAdmin(compactJwt) && uploadedInputStream != null) {
                 String email = auth.getEmailFromJWS(compactJwt);
                 if (body.getMediaType().toString().equals("image/jpeg")
                         || body.getMediaType().toString().equals("image/png")) {

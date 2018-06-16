@@ -47,7 +47,7 @@ public class ImageUploadDAO {
             UtenteDTO uDTO = uDAO.loadUtenteDTOByEmail(email);
             String oldUrl = uDTO.getImage();
             if (oldUrl != null) {
-                File oldProfPic = new File(oldUrl);
+                File oldProfPic = new File(pathToDirectory(oldUrl));
                 oldProfPic.delete();
             }
             String fileName = uDTO.getId() + "_" + fileDetail.getFileName();
@@ -69,6 +69,10 @@ public class ImageUploadDAO {
                 .entity("File saved to " + UPLOAD_FOLDER + "and remotely accessible from " + PATH).build();
     }
 
+    private String pathToDirectory(String path) {
+        return UPLOAD_FOLDER + path.substring(PATH.length());
+    }
+    
     /**
      * Utility method to save InputStream data to target location/file returns
      * true if file is bigger than max size allowed
