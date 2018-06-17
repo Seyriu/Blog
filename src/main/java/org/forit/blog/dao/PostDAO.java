@@ -77,6 +77,7 @@ public class PostDAO {
                 pEntity.getDataPost(),
                 pEntity.getVisibile(),
                 pEntity.getVisite(),
+                pEntity.getImage(),
                 cDTO,
                 uDTO);
 
@@ -124,6 +125,7 @@ public class PostDAO {
                 pDTO.getDataPost(),
                 pDTO.getVisibile(),
                 pDTO.getVisite(),
+                pDTO.getImage(),
                 cEntity,
                 uEntity);
 
@@ -264,4 +266,26 @@ public class PostDAO {
             em.close();
         }
     }
+
+    public void updateImage(String imagePath, long id) throws BlogException {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+        EntityManager em = emf.createEntityManager();
+
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+
+            PostEntity post = postDTOToPostEntity(loadPost(id));
+            post.setImage(imagePath);
+            em.merge(post);
+
+            transaction.commit();
+        } catch (Exception ex) {
+            transaction.rollback();
+            throw new BlogException(ex);
+        } finally {
+            em.close();
+        }
+    }
+
 }

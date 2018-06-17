@@ -54,7 +54,7 @@ public class UtenteEntity implements Serializable {
     @Column(name = "is_banned", unique = false, nullable = false)
     private Boolean isBanned;
 
-    @Column(name = "image", unique = false, nullable = true)
+    @Column(name = "image", unique = true, nullable = true)
     private String image;
 
     @Column(name = "date_creation", unique = false, nullable = false)

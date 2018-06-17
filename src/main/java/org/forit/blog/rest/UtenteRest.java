@@ -53,7 +53,7 @@ public class UtenteRest {
             Authentication auth = new Authentication();
             if (auth.checkJWSUtenteOrAdmin(compactJwt)) {
                 UtenteDAO uDAO = new UtenteDAO();
-                return uDAO.loadUtente(id);
+                return uDAO.loadUtenteDTO(id);
             } else {
                 return null;
             }

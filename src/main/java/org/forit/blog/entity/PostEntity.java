@@ -42,20 +42,23 @@ public class PostEntity implements Serializable {
     @Column(name = "ID", unique = true, nullable = false)
     private long id = -1;
 
-    @Column(name = "TITOLO", unique = true, nullable = true)
+    @Column(name = "TITOLO", unique = false, nullable = true)
     private String titolo;
 
-    @Column(name = "DESCRIZIONE", unique = true, nullable = true)
+    @Column(name = "DESCRIZIONE", unique = false, nullable = true)
     private String descrizione;
 
-    @Column(name = "DATA", unique = true, nullable = false)
+    @Column(name = "DATA", unique = false, nullable = false)
     private LocalDateTime dataPost;
 
-    @Column(name = "VISIBILE", unique = true, nullable = false)
+    @Column(name = "VISIBILE", unique = false, nullable = false)
     private Boolean visibile;
 
-    @Column(name = "VISITE", unique = true, nullable = false)
+    @Column(name = "VISITE", unique = false, nullable = false)
     private Integer visite;
+
+    @Column(name = "IMAGE", unique = true, nullable = true)
+    private String image;
 
     @OneToOne
     @JoinColumn(name = "ID_CATEGORIA")
@@ -79,13 +82,14 @@ public class PostEntity implements Serializable {
     public PostEntity() {
     }
 
-    public PostEntity(long id, String titolo, String descrizione, LocalDateTime dataPost, Boolean visibile, Integer visite, CategoriaEntity categoria, UtenteEntity utente) {
+    public PostEntity(long id, String titolo, String descrizione, LocalDateTime dataPost, Boolean visibile, Integer visite, String image, CategoriaEntity categoria, UtenteEntity utente) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.dataPost = dataPost;
         this.visibile = visibile;
         this.visite = visite;
+        this.image = image;
         this.categoria = categoria;
         this.utente = utente;
     }
@@ -154,6 +158,14 @@ public class PostEntity implements Serializable {
         this.visite = visite;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public List<CommentoEntity> getCommenti() {
         return commenti;
     }
@@ -183,16 +195,17 @@ public class PostEntity implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 83 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 83 * hash + Objects.hashCode(this.titolo);
-        hash = 83 * hash + Objects.hashCode(this.descrizione);
-        hash = 83 * hash + Objects.hashCode(this.dataPost);
-        hash = 83 * hash + Objects.hashCode(this.visibile);
-        hash = 83 * hash + Objects.hashCode(this.visite);
-        hash = 83 * hash + Objects.hashCode(this.categoria);
-        hash = 83 * hash + Objects.hashCode(this.utente);
-        hash = 83 * hash + Objects.hashCode(this.commenti);
-        hash = 83 * hash + Objects.hashCode(this.tags);
+        hash = 61 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 61 * hash + Objects.hashCode(this.titolo);
+        hash = 61 * hash + Objects.hashCode(this.descrizione);
+        hash = 61 * hash + Objects.hashCode(this.dataPost);
+        hash = 61 * hash + Objects.hashCode(this.visibile);
+        hash = 61 * hash + Objects.hashCode(this.visite);
+        hash = 61 * hash + Objects.hashCode(this.image);
+        hash = 61 * hash + Objects.hashCode(this.categoria);
+        hash = 61 * hash + Objects.hashCode(this.utente);
+        hash = 61 * hash + Objects.hashCode(this.commenti);
+        hash = 61 * hash + Objects.hashCode(this.tags);
         return hash;
     }
 
@@ -215,6 +228,9 @@ public class PostEntity implements Serializable {
             return false;
         }
         if (!Objects.equals(this.descrizione, other.descrizione)) {
+            return false;
+        }
+        if (!Objects.equals(this.image, other.image)) {
             return false;
         }
         if (!Objects.equals(this.dataPost, other.dataPost)) {
@@ -243,7 +259,7 @@ public class PostEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "PostEntity{" + "id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", dataPost=" + dataPost + ", visibile=" + visibile + ", visite=" + visite + ", categoria=" + categoria + ", utente=" + utente + ", commenti=" + commenti + ", tag=" + tags + '}';
+        return "PostEntity{" + "id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", dataPost=" + dataPost + ", visibile=" + visibile + ", visite=" + visite + ", image=" + image + ", categoria=" + categoria + ", utente=" + utente + ", commenti=" + commenti + ", tags=" + tags + '}';
     }
 
 }

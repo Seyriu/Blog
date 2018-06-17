@@ -90,7 +90,17 @@ public class UtenteDAO {
         return uDTO;
     }
 
-    public UtenteDTO loadUtente(long id) {
+    public UtenteEntity loadUtente(long id) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
+        EntityManager em = emf.createEntityManager();
+        UtenteEntity utenteEntity = em.find(UtenteEntity.class, id);
+        em.close();
+        emf.close();
+
+        return utenteEntity;
+    }
+
+    public UtenteDTO loadUtenteDTO(long id) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
         EntityManager em = emf.createEntityManager();
         UtenteEntity utenteEntity = em.find(UtenteEntity.class, id);
@@ -206,7 +216,7 @@ public class UtenteDAO {
         }
     }
 
-    public void updateImage(String imagePath, String email) throws BlogException {
+    public void updateImage(String imagePath, long id) throws BlogException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
         EntityManager em = emf.createEntityManager();
 
@@ -214,7 +224,7 @@ public class UtenteDAO {
         try {
             transaction.begin();
 
-            UtenteEntity utente = loadUtenteByEmail(email);
+            UtenteEntity utente = loadUtente(id);
             utente.setImage(imagePath);
             em.merge(utente);
 

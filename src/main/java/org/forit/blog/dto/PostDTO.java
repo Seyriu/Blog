@@ -28,6 +28,7 @@ public class PostDTO {
     private LocalDateTime dataPost;
     private Boolean visibile;
     private int visite;
+    private String image;
     private CategoriaDTO categoria;
     private UtenteDTO utente;
     private List<TagDTO> Tags;
@@ -36,13 +37,14 @@ public class PostDTO {
     public PostDTO() {
     }
 
-    public PostDTO(long id, String titolo, String descrizione, LocalDateTime dataPost, Boolean visibile, int visite, CategoriaDTO categoria, UtenteDTO utente) {
+    public PostDTO(long id, String titolo, String descrizione, LocalDateTime dataPost, Boolean visibile, int visite, String image, CategoriaDTO categoria, UtenteDTO utente) {
         this.id = id;
         this.titolo = titolo;
         this.descrizione = descrizione;
         this.dataPost = dataPost;
         this.visibile = visibile;
         this.visite = visite;
+        this.image = image;
         this.categoria = categoria;
         this.utente = utente;
     }
@@ -103,6 +105,14 @@ public class PostDTO {
         this.visite = visite;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public CategoriaDTO getCategoria() {
         return categoria;
     }
@@ -137,17 +147,18 @@ public class PostDTO {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.titolo);
-        hash = 29 * hash + Objects.hashCode(this.descrizione);
-        hash = 29 * hash + Objects.hashCode(this.dataPost);
-        hash = 29 * hash + Objects.hashCode(this.visibile);
-        hash = 29 * hash + this.visite;
-        hash = 29 * hash + Objects.hashCode(this.categoria);
-        hash = 29 * hash + Objects.hashCode(this.utente);
-        hash = 29 * hash + Objects.hashCode(this.Tags);
-        hash = 29 * hash + Objects.hashCode(this.commenti);
+        int hash = 5;
+        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.titolo);
+        hash = 71 * hash + Objects.hashCode(this.descrizione);
+        hash = 71 * hash + Objects.hashCode(this.dataPost);
+        hash = 71 * hash + Objects.hashCode(this.visibile);
+        hash = 71 * hash + this.visite;
+        hash = 71 * hash + Objects.hashCode(this.image);
+        hash = 71 * hash + Objects.hashCode(this.categoria);
+        hash = 71 * hash + Objects.hashCode(this.utente);
+        hash = 71 * hash + Objects.hashCode(this.Tags);
+        hash = 71 * hash + Objects.hashCode(this.commenti);
         return hash;
     }
 
@@ -175,6 +186,9 @@ public class PostDTO {
         if (!Objects.equals(this.descrizione, other.descrizione)) {
             return false;
         }
+        if (!Objects.equals(this.image, other.image)) {
+            return false;
+        }
         if (!Objects.equals(this.dataPost, other.dataPost)) {
             return false;
         }
@@ -198,7 +212,7 @@ public class PostDTO {
 
     @Override
     public String toString() {
-        return "PostDTO{" + "id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", dataPost=" + dataPost + ", visibile=" + visibile + ", visite=" + visite + ", categoria=" + categoria + ", utente=" + utente + ", Tags=" + Tags + ", commenti=" + commenti + '}';
+        return "PostDTO{" + "id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", dataPost=" + dataPost + ", visibile=" + visibile + ", visite=" + visite + ", image=" + image + ", categoria=" + categoria + ", utente=" + utente + ", Tags=" + Tags + ", commenti=" + commenti + '}';
     }
 
 }
