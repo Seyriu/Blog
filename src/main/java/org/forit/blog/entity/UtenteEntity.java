@@ -42,7 +42,7 @@ public class UtenteEntity implements Serializable {
     @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "PASSWORD", unique = false, nullable = false)
+    @Column(name = "PASSWORD", unique = false, nullable = true)
     private String password;
 
     @Column(name = "is_active", unique = false, nullable = false)
@@ -70,10 +70,9 @@ public class UtenteEntity implements Serializable {
     public UtenteEntity() {
     }
 
-    public UtenteEntity(long id, String email, String password, Boolean isActive, Integer failed_access_attempts, Boolean isBanned, String image, LocalDateTime dateCreation, LocalDateTime dateLastAccess, RuoloEntity ruolo) {
+    public UtenteEntity(long id, String email, Boolean isActive, Integer failed_access_attempts, Boolean isBanned, String image, LocalDateTime dateCreation, LocalDateTime dateLastAccess, RuoloEntity ruolo) {
         this.id = id;
         this.email = email;
-        this.password = password;
         this.isActive = isActive;
         this.failed_access_attempts = failed_access_attempts;
         this.isBanned = isBanned;

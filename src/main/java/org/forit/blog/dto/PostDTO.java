@@ -147,18 +147,18 @@ public class PostDTO {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 71 * hash + Objects.hashCode(this.titolo);
-        hash = 71 * hash + Objects.hashCode(this.descrizione);
-        hash = 71 * hash + Objects.hashCode(this.dataPost);
-        hash = 71 * hash + Objects.hashCode(this.visibile);
-        hash = 71 * hash + this.visite;
-        hash = 71 * hash + Objects.hashCode(this.image);
-        hash = 71 * hash + Objects.hashCode(this.categoria);
-        hash = 71 * hash + Objects.hashCode(this.utente);
-        hash = 71 * hash + Objects.hashCode(this.Tags);
-        hash = 71 * hash + Objects.hashCode(this.commenti);
+        int hash = 7;
+        hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.titolo);
+        hash = 89 * hash + Objects.hashCode(this.descrizione);
+        hash = 89 * hash + Objects.hashCode(this.dataPost);
+        hash = 89 * hash + Objects.hashCode(this.visibile);
+        hash = 89 * hash + this.visite;
+        hash = 89 * hash + Objects.hashCode(this.image);
+        hash = 89 * hash + Objects.hashCode(this.categoria);
+        hash = 89 * hash + Objects.hashCode(this.utente);
+        hash = 89 * hash + Objects.hashCode(this.Tags);
+        hash = 89 * hash + Objects.hashCode(this.commenti);
         return hash;
     }
 
@@ -214,5 +214,5 @@ public class PostDTO {
     public String toString() {
         return "PostDTO{" + "id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", dataPost=" + dataPost + ", visibile=" + visibile + ", visite=" + visite + ", image=" + image + ", categoria=" + categoria + ", utente=" + utente + ", Tags=" + Tags + ", commenti=" + commenti + '}';
     }
-
+    
 }

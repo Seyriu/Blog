@@ -108,7 +108,6 @@ public class PostDAO {
             uEntity = new UtenteEntity(
                     pDTO.getUtente().getId(),
                     pDTO.getUtente().getEmail(),
-                    pDTO.getUtente().getPassword(),
                     pDTO.getUtente().getIsActive(),
                     pDTO.getUtente().getFailedAccessAttempts(),
                     pDTO.getUtente().getIsBanned(),
@@ -197,7 +196,7 @@ public class PostDAO {
         }
     }
 
-    public void insertPost(PostDTO pDTO) throws BlogException {
+    public long insertPost(PostDTO pDTO) throws BlogException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu"); // nome dato in persistence.xml
         EntityManager em = emf.createEntityManager();
 
@@ -212,6 +211,7 @@ public class PostDAO {
             pEntity.setCommenti(null);
             pEntity.setVisite(pDTO.getVisite());
             pEntity.setVisibile(pDTO.getVisibile());
+            pEntity.setImage(pDTO.getImage());
             pEntity.setDataPost(pDTO.getDataPost());
             pEntity.setDescrizione(pDTO.getDescrizione());
             pEntity.setTitolo(pDTO.getTitolo());
@@ -219,24 +219,28 @@ public class PostDAO {
 
             TagDAO tDAO = new TagDAO();
             // removing duplicates
-            Set<TagDTO> tagSet = new HashSet<>(pDTO.getTags());
-            pDTO.setTags(new ArrayList(tagSet));
+            if (pDTO.getTags() != null) {
+                Set<TagDTO> tagSet = new HashSet<>(pDTO.getTags());
+                pDTO.setTags(new ArrayList(tagSet));
 
-            pDTO.getTags().stream().forEach(tDTO -> {
+                pDTO.getTags().stream().forEach(tDTO -> {
 
-                if (tDAO.loadTagByName(tDTO.getNome()) == null) {
-                    try {
-                        tDAO.insertTag(new TagDTO(-1, tDTO.getNome()));
-                    } catch (BlogException ex) {
-                        System.out.println("Insert Tag Failed: " + ex.getLocalizedMessage());
+                    if (tDAO.loadTagByName(tDTO.getNome()) == null) {
+                        try {
+                            tDAO.insertTag(new TagDTO(-1, tDTO.getNome()));
+                        } catch (BlogException ex) {
+                            System.out.println("Insert Tag Failed: " + ex.getLocalizedMessage());
+                        }
                     }
-                }
-                TagDTO tagDTO = tDAO.loadTagByName(tDTO.getNome());
-                pEntity.addTag(new TagEntity(tagDTO.getId(), tagDTO.getNome()));
-            });
-
+                    TagDTO tagDTO = tDAO.loadTagByName(tDTO.getNome());
+                    pEntity.addTag(new TagEntity(tagDTO.getId(), tagDTO.getNome()));
+                });
+            }
+            
             em.persist(pEntity);
+            em.flush();
             transaction.commit();
+            return pEntity.getId();
         } catch (Exception ex) {
             transaction.rollback();
             throw new BlogException(ex);

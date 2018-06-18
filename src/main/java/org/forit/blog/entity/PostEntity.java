@@ -57,7 +57,7 @@ public class PostEntity implements Serializable {
     @Column(name = "VISITE", unique = false, nullable = false)
     private Integer visite;
 
-    @Column(name = "IMAGE", unique = true, nullable = true)
+    @Column(name = "IMAGE", unique = false, nullable = true)
     private String image;
 
     @OneToOne
@@ -166,20 +166,20 @@ public class PostEntity implements Serializable {
         this.image = image;
     }
 
-    public List<CommentoEntity> getCommenti() {
-        return commenti;
-    }
-
-    public void setCommenti(List<CommentoEntity> commenti) {
-        this.commenti = commenti;
-    }
-
     public CategoriaEntity getCategoria() {
         return categoria;
     }
 
     public void setCategoria(CategoriaEntity categoria) {
         this.categoria = categoria;
+    }
+
+    public List<CommentoEntity> getCommenti() {
+        return commenti;
+    }
+
+    public void setCommenti(List<CommentoEntity> commenti) {
+        this.commenti = commenti;
     }
     
     public void addTag(TagEntity tag) {

@@ -63,7 +63,6 @@ public class UtenteDAO {
         UtenteEntity uEntity = new UtenteEntity(
                 uDTO.getId(),
                 uDTO.getEmail(),
-                uDTO.getPassword(),
                 uDTO.getIsActive(),
                 uDTO.getFailedAccessAttempts(),
                 uDTO.getIsBanned(),
@@ -138,7 +137,7 @@ public class UtenteDAO {
         return null; 
     }
 
-    public void insertUtente(UtenteDTO uDTO) throws BlogException {
+    public void insertUtente(UtenteDTO uDTO, String password) throws BlogException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("blog_pu");
         EntityManager em = emf.createEntityManager();
 
@@ -148,12 +147,13 @@ public class UtenteDAO {
 
             UtenteEntity uEntity = new UtenteEntity();
             uEntity.setEmail(uDTO.getEmail());
-            uEntity.setPassword(uDTO.getPassword());
+            uEntity.setPassword(password);
             uEntity.setDateCreation(uDTO.getDateCreation());
             uEntity.setDateLastAccess(uDTO.getDateLastAccess());
             uEntity.setFailed_access_attempts(0);
             uEntity.setIsActive(uDTO.getIsActive());
             uEntity.setIsBanned(uDTO.getIsBanned());
+            uEntity.setImage(uDTO.getImage());
             if (uDTO.getRuolo() != null) {
                 uEntity.setRuolo(new RuoloEntity(
                         uDTO.getRuolo().getId(),

@@ -73,7 +73,15 @@ public class ImageUploadRest {
             @FormDataParam("profilePicture") final FormDataBodyPart body,
             @PathParam("postId") Long id,
             @HeaderParam("jwt") String compactJwt) {
-        return uploadImage(uploadedInputStream, fileDetail, body, id, compactJwt, POST_PIC);
+        try {
+            Authentication auth = new Authentication();
+            if (auth.checkJWSAdmin(compactJwt) && uploadedInputStream != null) {
+                return uploadImage(uploadedInputStream, fileDetail, body, id, compactJwt, POST_PIC);
+            }
+            return null;
+        } catch (BlogException ex) {
+            return Response.status(500).entity("Authentication failed: " + ex).build();
+        }
     }
 
     private Response uploadImage(InputStream uploadedInputStream,

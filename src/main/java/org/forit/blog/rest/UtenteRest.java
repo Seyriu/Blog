@@ -67,11 +67,10 @@ public class UtenteRest {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public boolean insertUtente(UtenteDTO uDTO
-    ) {
+    public boolean insertUtente(UtenteDTO uDTO, @HeaderParam("pssw") String password) {
         try {
             UtenteDAO uDAO = new UtenteDAO();
-            uDAO.insertUtente(uDTO);
+            uDAO.insertUtente(uDTO, password);
             return true;
         } catch (BlogException ex) {
             System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());

@@ -67,19 +67,18 @@ public class PostRest {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public boolean insertPost(PostDTO pDTO, @HeaderParam("jwt") String compactJwt) {
+    public long insertPost(PostDTO pDTO, @HeaderParam("jwt") String compactJwt) {
         try {
             Authentication auth = new Authentication();
             if (auth.checkJWSAdmin(compactJwt)) {
                 PostDAO pDAO = new PostDAO();
-                pDAO.insertPost(pDTO);
-                return true;
+                return pDAO.insertPost(pDTO);
             } else {
-                return false;
+                return -1;
             }
         } catch (BlogException ex) {
             System.out.println("Si e' verificato un errore: " + ex.getLocalizedMessage());
-            return false;
+            return -1;
         }
     }
     
