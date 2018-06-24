@@ -14,6 +14,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import org.forit.blog.authentication.Authentication;
 import org.forit.blog.dao.UtenteDAO;
 import org.forit.blog.dto.UtenteDTO;
@@ -82,7 +83,7 @@ public class UtenteRest {
     @PUT
     @Consumes("application/json")
     @Produces("application/json")
-    public boolean updateActivated(boolean isActive,
+    public boolean updateActivated(@HeaderParam("isActive") boolean isActive,
             @PathParam("id") long id,
             @HeaderParam("jwt") String compactJwt
     ) {
@@ -103,7 +104,7 @@ public class UtenteRest {
 
     @Path("/banned/{id}")
     @PUT
-    @Consumes("application/json")
+    @Consumes(MediaType.TEXT_PLAIN)
     @Produces("application/json")
     public boolean updateBanned(boolean isBanned,
             @PathParam("id") long id,

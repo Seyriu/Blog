@@ -6,6 +6,8 @@
 package org.forit.blog.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -150,6 +152,14 @@ public class PostDAO {
         em.close();
         emf.close();
 
+        // Sorting
+        Collections.sort(pDTO, new Comparator<PostDTO>() {
+            @Override
+            public int compare(PostDTO post1, PostDTO post2) {
+                return post1.getDataPost().isBefore(post2.getDataPost()) ? 1 : -1;
+            }
+        });
+
         return pDTO;
     }
 
@@ -207,6 +217,7 @@ public class PostDAO {
             CategoriaDAO cDAO = new CategoriaDAO();
             UtenteDAO uDAO = new UtenteDAO();
             PostEntity pEntity = new PostEntity();
+            pEntity.setId(-1);
             pEntity.setCategoria(cDAO.CategoriaDtoToCategoriaEntity(pDTO.getCategoria()));
             pEntity.setCommenti(null);
             pEntity.setVisite(pDTO.getVisite());
@@ -218,6 +229,7 @@ public class PostDAO {
             pEntity.setUtente(uDAO.utenteDTOToUtenteEntity(pDTO.getUtente()));
 
             TagDAO tDAO = new TagDAO();
+            pDTO.setTags(tagsFromText(pEntity.getDescrizione()));
             // removing duplicates
             if (pDTO.getTags() != null) {
                 Set<TagDTO> tagSet = new HashSet<>(pDTO.getTags());
@@ -236,7 +248,7 @@ public class PostDAO {
                     pEntity.addTag(new TagEntity(tagDTO.getId(), tagDTO.getNome()));
                 });
             }
-            
+
             em.persist(pEntity);
             em.flush();
             transaction.commit();
@@ -248,6 +260,28 @@ public class PostDAO {
             em.close();
             emf.close();
         }
+    }
+
+    private List<TagDTO> tagsFromText(String text) {
+        List<TagDTO> tags = new ArrayList<>();
+        TagDTO tag = null;
+        String[] names;
+        if (text != null && text != "") {
+            names = text.split("#");
+            for (int i = 0; i < names.length; i++) {
+                if (i > 0) {
+                    if (names[i].indexOf(' ') > 0) {
+                        names[i] = names[i].substring(0, names[i].indexOf(' '));
+                    } else {
+                        names[i] = names[i].substring(0);
+                    }
+                    tag = new TagDTO(-1, names[i]);
+                    tags.add(tag);
+                }
+            }
+        }
+
+        return tags;
     }
 
     public void increaseViewCount(long id) throws BlogException {

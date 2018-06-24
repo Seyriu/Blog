@@ -146,6 +146,7 @@ public class UtenteDAO {
             transaction.begin();
 
             UtenteEntity uEntity = new UtenteEntity();
+            uEntity.setId(-1);
             uEntity.setEmail(uDTO.getEmail());
             uEntity.setPassword(password);
             uEntity.setDateCreation(uDTO.getDateCreation());
@@ -264,7 +265,8 @@ public class UtenteDAO {
             UtenteEntity uEntity = loadUtenteByEmail(email);
             UtenteDTO uDTO = this.UtenteEntityToUtenteDTO(uEntity);
             uDTO.setPassword(uEntity.getPassword());
-            if (password.equals(uDTO.getPassword())) {
+            if (password.equals(uDTO.getPassword()) &&
+                    uDTO.getIsActive() && !uDTO.getIsBanned()) {
                 Authentication auth = new Authentication();
                 jwt.add(auth.getJWS(path, uDTO.getEmail(), uDTO.getRuolo().getNome()));
                 jwt.add(Long.toString(uEntity.getId()));

@@ -31,8 +31,8 @@ public class PostDTO {
     private String image;
     private CategoriaDTO categoria;
     private UtenteDTO utente;
-    private List<TagDTO> Tags;
     private List<CommentoDTO> commenti;
+    private List<TagDTO> Tags;
 
     public PostDTO() {
     }

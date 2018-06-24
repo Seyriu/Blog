@@ -81,7 +81,7 @@ public class TagEntity implements Serializable {
         post.getTags().add(this);
     }
 
-    public void removeTag(PostEntity post) {
+    public void removePost(PostEntity post) {
         posts.remove(post);
         post.getTags().remove(this);
     }
